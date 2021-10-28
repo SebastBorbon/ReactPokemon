@@ -7,7 +7,7 @@ import React from "react";
 function App() {
   return (
     <>
-      <Route exact path="/login" component={LogIn} />
+      <Route exact path="/auth/login" component={LogIn} />
     </>
   );
 }

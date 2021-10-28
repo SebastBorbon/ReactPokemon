@@ -1,19 +1,36 @@
-import React, { useDispatch, useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import "./LogIn.scss";
+// import { login } from "../../redux/actions/index";
+import { logIn } from "../../redux/actions/sending";
 
 const LogIn = () => {
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+  const { username, password } = inputs;
+  const dispatch = useDispatch();
+  // const selectInputs = useSelector((state) => state.username);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  }
 
   return (
     <div>
       <div>
-        <form className="login" onSubmit="submit">
+        <form className="login" onSubmit={handleSubmit}>
           <input
-            name="user"
-            value={user}
+            name="username"
+            value={username}
             placeholder="User"
-            onChange={(e) => setUser(e.target.value)}
+            onChange={handleChange}
             required
           />
           <input
@@ -21,11 +38,15 @@ const LogIn = () => {
             value={password}
             placeholder="Password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
             required
           />
 
-          <button type="submit" className="btnSubmit">
+          <button
+            onClick={() => dispatch(logIn(inputs))}
+            type="submit"
+            className="btnSubmit"
+          >
             Login
           </button>
         </form>

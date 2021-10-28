@@ -12,16 +12,19 @@ const UserModel = mongoose.model("UserModel", {
 
 const registerUser = async (userName, password) => {
   //save in the database
-
-  let hashedPwd = hashPasswordSync(password);
-  let userId = uuidv4();
-  let newUser = new UserModel({
-    userId: userId,
-    userName: userName,
-    password: hashedPwd,
-  });
-  await newUser.save().then(() => console.log("hecho rey"));
-  await newUserTeam(userId);
+  try {
+    let hashedPwd = hashPasswordSync(password);
+    let userId = uuidv4();
+    let newUser = new UserModel({
+      userId: userId,
+      userName: userName,
+      password: hashedPwd,
+    });
+    await newUser.save().then(() => console.log("hecho rey"));
+    await newUserTeam(userId);
+  } catch {
+    console.log("MALARDA");
+  }
 };
 
 const getUser = async (userId) => {

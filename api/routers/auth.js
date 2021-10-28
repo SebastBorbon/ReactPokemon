@@ -6,6 +6,7 @@ const {
 } = require("../controllers/users");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const CircularJSON = require("circular-json");
 
 router.route("/").get((req, res) => {
   res.send("estas en auth");
@@ -19,12 +20,12 @@ router.route("/login").post(async (req, res) => {
   if (!req.body) {
     //entra el usuario completo
     return res.status(400).json({ message: "missing data" });
-  } else if (!req.body.user || !req.body.password) {
+  } else if (!req.body.username || !req.body.password) {
     return res.status(400).json({ message: "Falta contra" });
   }
   //comprobar credenciales
-  await registerUser(req.body.user, req.body.password);
-  res.send("todobien");
+  await registerUser(req.body.username, req.body.password);
+  return res.send("todobien");
   // checkUserCredentials(req.body.user, req.body.password, (err, response) => {
   //   if (err || !res) {
   //     return res.status(401).json({ message: "Invalid credentials" });
