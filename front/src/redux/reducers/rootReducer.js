@@ -1,12 +1,9 @@
 // import { useReducer } from "react";
 import { LOGIN } from "../actions/constants";
 
-let username = JSON.parse(localStorage.getItem("username"));
-let password = JSON.parse(localStorage.getItem("password"));
 const initialState = {
   isLogin: false,
-  username,
-  password,
+  user: {},
 };
 
 export function loginReducer(state = initialState, action) {
@@ -15,8 +12,7 @@ export function loginReducer(state = initialState, action) {
       return {
         ...state,
         isLogin: true,
-        username: action.payload.username,
-        password: action.payload.password,
+        user: action.payload,
       };
     default:
       return state;

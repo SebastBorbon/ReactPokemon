@@ -3,15 +3,18 @@ import { LOGIN, GET_URL } from "./constants";
 
 export const logIn = (user) => {
   return async (dispatch) => {
-    let apiRes;
-    console.log('"esto es lo que mandamos rey", user');
+    console.log("esto es lo que mandamos rey", user);
     try {
       console.log("request casi hecha");
-      await axios.post(`${GET_URL}auth/login`, user);
-      dispatch({ type: LOGIN, payload: user });
-      console.log(apiRes.data);
+      const res = await axios.post(`${GET_URL}auth/login`, user);
+      console.log(res);
+      window.localStorage.setItem("userId", res.data.userId.toString());
+
+      dispatch({ type: LOGIN, payload: res.data });
     } catch (err) {
       return console.log("fallo en el sending");
     }
   };
 };
+
+// var = window.localStorage.getItem('userId')

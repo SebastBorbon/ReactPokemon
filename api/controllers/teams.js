@@ -30,8 +30,17 @@ const addPokemon = async (userId, pokemon) => {
   }
 };
 
-const setTeam = (userId, team) => {
-  teamsDatabase[userid] = team;
+const setTeam = async (userId, team) => {
+  let [err, dbTeam] = await to(
+    TeamsModel.updateOne(
+      { userId: userId },
+      { $set: { team: team } },
+      { upsert: true }
+    ).exec()
+  );
+  if (err || !dbTeam) {
+    return reject(err);
+  }
 };
 
 module.exports = {

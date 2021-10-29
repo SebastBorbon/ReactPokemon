@@ -25,7 +25,9 @@ router.route("/login").post(async (req, res) => {
   }
   //comprobar credenciales
   await registerUser(req.body.username, req.body.password);
-  return res.send("todobien");
+  let userReturned = await getUserIdFromUserName(req.body.username);
+  console.log(userReturned);
+  return res.send(userReturned);
   // checkUserCredentials(req.body.user, req.body.password, (err, response) => {
   //   if (err || !res) {
   //     return res.status(401).json({ message: "Invalid credentials" });

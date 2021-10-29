@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./LogIn.scss";
-// import { login } from "../../redux/actions/index";
 import { logIn } from "../../redux/actions/sending";
+import { useHistory } from "react-router-dom";
 
 const LogIn = () => {
   const [inputs, setInputs] = useState({
@@ -11,7 +11,16 @@ const LogIn = () => {
   });
   const { username, password } = inputs;
   const dispatch = useDispatch();
-  // const selectInputs = useSelector((state) => state.username);
+  //ADD VALIDATION TOKEN
+  const loged = useSelector((state) => state.user.userId);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loged) {
+      history.push("/teams");
+      window.location.reload();
+    }
+  }, [loged]);
 
   function handleSubmit(e) {
     e.preventDefault();
