@@ -19,14 +19,12 @@ const getTeamUser = async (userId) => {
 };
 
 const addPokemon = async (userId, pokemon) => {
-  let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
+  let [err, dbTeam] = await TeamsModel.findOne({ userId: userId });
   if (dbPokeTeam.team.length == 6) {
-    return console.log("no funciono");
+    return console.log("ya tienes 6 pokemon");
   } else {
-    await TeamsModel.findOneAndUpdate(
-      { userId: userId },
-      { $push: { team: pokemon } }
-    );
+    dbTeam.team.push(pokemon);
+    await dbTeam.save().then(() => console.log("pokemon a;adido"));
   }
 };
 

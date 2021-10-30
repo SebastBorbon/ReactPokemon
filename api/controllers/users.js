@@ -1,8 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
-const { comparePassword, hashPasswordSync } = require("../crypto");
 const { newUserTeam } = require("./teams");
 const mongoose = require("mongoose");
-const userDatabase = {};
+const bcrypt = require("bcrypt");
 
 const UserModel = mongoose.model("UserModel", {
   userName: String,
@@ -13,7 +12,7 @@ const UserModel = mongoose.model("UserModel", {
 const registerUser = async (userName, password) => {
   //save in the database
   try {
-    let hashedPwd = hashPasswordSync(password);
+    let hashedPwd = await bcrypt.hash(password, 10);
     let userId = uuidv4();
     let newUser = new UserModel({
       userId: userId,
@@ -31,25 +30,39 @@ const getUser = async (userId) => {
   return await UserModel.findById(userId);
 };
 
-const getUserIdFromUserName = async (userName) => {
-  let userByName = await UserModel.findOne({ userName: userName });
-  if (userByName) return userByName;
+const getUserIdFromEmail = async (email) => {
+  try {
+    let userByName = await UserModel.findOne({ userName: email });
+    if (!userByName) {
+      console.log("usuario incorrecto");
+    } else {
+      return userByName;
+    }
+  } catch {
+    console.log("no se pudo conectar a la BD");
+  }
 };
 
-const checkUserCredentials = (userName, password) => {
-  //comprueba si las credenciales son correctas
-  let user = getUserIdFromUserName(userName);
-  if (user) {
-    console.log(user);
-    comparePassword(password, user.password);
-  } else {
-    console.log("Missing user");
+const checkUserCredentials = async (email, password) => {
+  try {
+    let user = await getUserIdFromEmail(email);
+    if (user) {
+      let userPassword = await bcrypt.compare(password, user.password);
+      if (userPassword) {
+        console.log("usuario encontrado", user);
+        return user;
+      } else {
+        console.log("contrasena erronea");
+      }
+    }
+  } catch {
+    console.log("usuario no valido");
   }
 };
 
 module.exports = {
   checkUserCredentials,
   registerUser,
-  getUserIdFromUserName,
+  getUserIdFromEmail,
   getUser,
 };

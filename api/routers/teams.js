@@ -4,7 +4,7 @@ const passport = require("passport");
 require("../auth")(passport);
 const axios = require("axios");
 const { setTeam, getTeamUser, addPokemon } = require("../controllers/teams");
-const { getUserIdFromUserName, getUser } = require("../controllers/users");
+const { getUserIdFromEmail, getUser } = require("../controllers/users");
 
 router
   .route("/")

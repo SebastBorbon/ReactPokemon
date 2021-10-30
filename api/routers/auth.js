@@ -2,7 +2,7 @@ const express = require("express");
 const {
   checkUserCredentials,
   registerUser,
-  getUserIdFromUserName,
+  getUserIdFromEmail,
 } = require("../controllers/users");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
@@ -14,31 +14,35 @@ router.route("/").get((req, res) => {
 router.route("/login").get((req, res) => {
   res.send("estas en el login");
 });
-router.route("/login").post(async (req, res) => {
-  //comprobations if user exists
 
+router.route("/signup").post(async (req, res) => {
+  const { email, password } = req.body;
+  //comprobations if user exists
   if (!req.body) {
-    //entra el usuario completo
     return res.status(400).json({ message: "missing data" });
-  } else if (!req.body.username || !req.body.password) {
+  } else if (!email || !password) {
+    return res.status(400).json({ message: "missing data" });
+  }
+  await registerUser(email, password);
+  let userReturned = await getUserIdFromEmail(email);
+  return res.send(userReturned);
+});
+
+router.route("/login").post(async (req, res) => {
+  const { email, password } = req.body;
+  //comprobations if user exists
+  if (!req.body) {
+    return res.status(400).json({ message: "missing data" });
+  } else if (!email || !password) {
     return res.status(400).json({ message: "Falta contra" });
   }
   //comprobar credenciales
-  await registerUser(req.body.username, req.body.password);
-  let userReturned = await getUserIdFromUserName(req.body.username);
-  console.log(userReturned);
-  return res.send(userReturned);
-  // checkUserCredentials(req.body.user, req.body.password, (err, response) => {
-  //   if (err || !res) {
-  //     return res.status(401).json({ message: "Invalid credentials" });
-  //   }
-  //   //si son validas generar un JWT
-  //   let user = getUserIdFromUserName(req.body.user);
-  //   const token = jwt.sign({ userID: user }, "secret");
-  //   res.json({
-  //     token: token,
-  //   });
-  // });
+  console.log("el usuario buscado es", req.body);
+  let user = await checkUserCredentials(email, password);
+  //si son validas generar un JWT
+  return res.send(user);
+  // const token = jwt.sign({ userID: user }, "secret", { expiresIn: "1d" });
+  // return res.send(token);
 });
 
 exports.router = router;

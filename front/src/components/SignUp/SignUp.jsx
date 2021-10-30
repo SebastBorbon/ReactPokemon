@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./LogIn.scss";
-import { logIn } from "../../redux/actions/sending";
 import { useHistory } from "react-router";
-
-const LogIn = () => {
+import { signUp } from "../../redux/actions/sending";
+import "./SignUp.scss";
+import pokefondo from "../../public/pokefondo.png";
+const SignUp = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-
   const logged = useSelector((state) => state.user.userId);
   const history = useHistory();
 
@@ -26,7 +25,7 @@ const LogIn = () => {
       email: email,
       password: password,
     };
-    dispatch(logIn(data));
+    dispatch(signUp(data));
   };
 
   function validateUser(value) {
@@ -41,7 +40,7 @@ const LogIn = () => {
   return (
     <div>
       <div>
-        <form className="login" onSubmit={(e) => handleSubmit(e)}>
+        <form className="signUp" onSubmit={(e) => handleSubmit(e)}>
           <input
             name="username"
             value={email}
@@ -59,12 +58,14 @@ const LogIn = () => {
             required
           />
           <button type="submit" className="btnSubmit">
-            Login
+            Sign Up
           </button>
         </form>
+        <div className="pokemon"></div>
+        <img src={pokefondo} />
       </div>
     </div>
   );
 };
 
-export default LogIn;
+export default SignUp;

@@ -1,17 +1,23 @@
 // import { useReducer } from "react";
-import { LOGIN } from "../actions/constants";
+import { LOGIN, SIGNUP } from "../actions/constants";
 
 const initialState = {
-  isLogin: false,
+  logged: false,
   user: {},
 };
 
-export function loginReducer(state = initialState, action) {
+export function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN:
       return {
         ...state,
-        isLogin: true,
+        logged: true,
+        user: action.payload,
+      };
+    case SIGNUP:
+      return {
+        ...state,
+        logged: true,
         user: action.payload,
       };
     default:
