@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { signUp } from "../../redux/actions/sending";
 import "./SignUp.scss";
 import pokefondo from "../../public/pokefondo.png";
+
 const SignUp = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
@@ -61,8 +62,12 @@ const SignUp = () => {
             Sign Up
           </button>
         </form>
-        <div className="pokemon"></div>
-        <img src={pokefondo} />
+        <div className="pokemon">
+          <img src={pokefondo} className="pokefondo" />
+        </div>
+        <div className="Sebas">
+          <h1 class="ByMe">By Sebastian Borbon</h1>
+        </div>
       </div>
     </div>
   );

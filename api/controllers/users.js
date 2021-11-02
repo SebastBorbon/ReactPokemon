@@ -27,7 +27,12 @@ const registerUser = async (userName, password) => {
 };
 
 const getUser = async (userId) => {
-  return await UserModel.findById(userId);
+  try {
+    const findedUser = await UserModel.findOne({ userId: userId });
+    return findedUser;
+  } catch (err) {
+    console.log("no tengo usuario");
+  }
 };
 
 const getUserIdFromEmail = async (email) => {

@@ -14,36 +14,46 @@ const newUserTeam = async (userId) => {
 };
 
 const getTeamUser = async (userId) => {
-  let dbTeam = await TeamsModel.findOne({ userId: userId });
-  return dbTeam.team;
+  try {
+    let dbTeam = await TeamsModel.findOne({ userId: userId });
+    console.log("mandamos el equipo");
+    return dbTeam.team;
+  } catch (err) {
+    console.log("no hay usuario con ese id");
+  }
 };
 
 const addPokemon = async (userId, pokemon) => {
-  let [err, dbTeam] = await TeamsModel.findOne({ userId: userId });
-  if (dbPokeTeam.team.length == 6) {
-    return console.log("ya tienes 6 pokemon");
-  } else {
-    dbTeam.team.push(pokemon);
-    await dbTeam.save().then(() => console.log("pokemon a;adido"));
+  try {
+    let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
+    console.log(dbPokeTeam, " este es el team");
+    if (dbPokeTeam.team.length == 6) {
+      return console.log("ya tienes 6 pokemon");
+    } else {
+      dbPokeTeam.team.push(pokemon);
+      await dbPokeTeam.save().then(() => console.log("pokemon a;adido"));
+    }
+  } catch (err) {
+    console.log("no existe");
   }
 };
 
-const setTeam = async (userId, team) => {
-  let [err, dbTeam] = await to(
-    TeamsModel.updateOne(
-      { userId: userId },
-      { $set: { team: team } },
-      { upsert: true }
-    ).exec()
-  );
-  if (err || !dbTeam) {
-    return reject(err);
-  }
-};
+// const setTeam = async (userId, team) => {
+//   let [err, dbTeam] = await to(
+//     TeamsModel.updateOne(
+//       { userId: userId },
+//       { $set: { team: team } },
+//       { upsert: true }
+//     ).exec()
+//   );
+//   if (err || !dbTeam) {
+//     return reject(err);
+//   }
+// };
 
 module.exports = {
   newUserTeam,
   addPokemon,
-  setTeam,
+  // setTeam,
   getTeamUser,
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SIGNUP, LOGIN, GET_URL } from "./constants";
+import { SIGNUP, LOGIN, GET_URL, TEAM } from "./constants";
 
 export const logIn = (user) => {
   return async (dispatch) => {
@@ -15,9 +15,7 @@ export const logIn = (user) => {
 
 export const signUp = (user) => {
   return async (dispatch) => {
-    console.log("esto es lo que mandamos rey", user);
     try {
-      console.log("request casi hecha");
       const res = await axios.post(`${GET_URL}auth/signup`, user);
       console.log(res.data);
       window.localStorage.setItem("userId", res.data.userId.toString());
@@ -27,5 +25,19 @@ export const signUp = (user) => {
     }
   };
 };
+
+export const teams = (userId) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`${GET_URL}teams`, { userId: userId });
+      console.log(res.data);
+      dispatch({ type: TEAM, payload: res.data });
+    } catch (err) {
+      return console.log(err);
+    }
+  };
+};
+
+export const pokemonSearch = (pokemon) => {};
 
 // var = window.localStorage.getItem('userId')

@@ -4,28 +4,33 @@ const passport = require("passport");
 require("../auth")(passport);
 const axios = require("axios");
 const { setTeam, getTeamUser, addPokemon } = require("../controllers/teams");
-const { getUserIdFromEmail, getUser } = require("../controllers/users");
+const { getUser } = require("../controllers/users");
 
-router
-  .route("/")
-  .get(async (req, res) => {
-    res.send("estas en el teams");
-    const { id } = req.query;
+router.route("/").post(async (req, res) => {
+  const id = req.body.userId;
+  console.log("esto es lo que llega en el body", req.body.userId);
 
-    let user = await getUser(id);
-    res.json({
+  let user = await getUser(id);
+  console.log(user);
+  if (!user.userName) {
+    console.log("no he cargado el user");
+  } else {
+    res.send({
       userName: user.userName,
       team: await getTeamUser(id),
     });
-  })
-  .put((req, res) => {
-    setTeam(req.body.user, req.body.team);
-  });
+  }
+});
+// .put(async (req, res) => {
+//   await setTeam(req.body.user, req.body.team);
+// });
 
 router
   .route("/pokemons")
   .post(async (req, res) => {
+    console.log(req.body);
     let pokemonName = req.body.name;
+    let userId = req.body.userId;
     try {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
@@ -34,7 +39,7 @@ router
         name: pokemonName,
         pokeId: response.data.id,
       };
-      await addPokemon("8111cbbf-0b9c-4cb3-ba59-a8e566e62858", pokemon);
+      await addPokemon(userId, pokemon);
 
       console.log(pokemon);
       res.send("Pokemon guardado exitosamente");
