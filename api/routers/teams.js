@@ -28,8 +28,7 @@ router.route("/").post(async (req, res) => {
 router
   .route("/pokemons")
   .post(async (req, res) => {
-    console.log(req.body);
-    let pokemonName = req.body.name;
+    let pokemonName = req.body.pokemonName;
     let userId = req.body.userId;
     try {
       const response = await axios.get(
@@ -38,14 +37,14 @@ router
       let pokemon = {
         name: pokemonName,
         pokeId: response.data.id,
+        sprite: response.data.sprites.front_default,
       };
       await addPokemon(userId, pokemon);
 
       console.log(pokemon);
-      res.send("Pokemon guardado exitosamente");
+      res.send(pokemon);
     } catch (error) {
-      console.error([error]);
-      console.log("aqui fallecio");
+      console.log("pokemon no encontrado");
     }
   })
   .get((req, res) => {

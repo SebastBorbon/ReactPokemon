@@ -6,7 +6,6 @@ const {
 } = require("../controllers/users");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const CircularJSON = require("circular-json");
 
 router.route("/").get((req, res) => {
   res.send("estas en auth");

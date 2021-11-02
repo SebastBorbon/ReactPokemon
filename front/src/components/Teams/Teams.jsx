@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { teams } from "../../redux/actions/sending";
 import SearchBar from "../SearchBar/SearchBar";
 import Pokemon from "../Pokemon/Pokemon";
+import "./Teams.css";
 
 const Teams = () => {
   const [team, setTeam] = useState([]);
@@ -17,29 +18,28 @@ const Teams = () => {
     }
   }, [team, teamPokemons]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <div>
-      <h1>hola</h1>
       <div>
+        <SearchBar />
+      </div>
+      <h1>Tu equipo</h1>
+      <div className="Team">
         {teamPokemons !== undefined
           ? teamPokemons.map((pokemon) => {
               return (
                 <Pokemon
                   key={pokemon.pokeid}
                   pokemonName={pokemon.name}
-                  pokemonId={pokemon.pokeId}
+                  sprite={pokemon.sprite}
                 />
               );
             })
           : (console.log("ten tu team", teamPokemons), (<p>eyeye</p>))}
-      </div>
-      <div>
-        {" "}
-        <SearchBar />
       </div>
     </div>
   );

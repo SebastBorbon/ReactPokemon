@@ -12,6 +12,13 @@ const newUserTeam = async (userId) => {
     console.log("se da;o aca");
   }
 };
+const deleteTeam = async () => {
+  try {
+    await TeamsModel.deletMany({});
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 const getTeamUser = async (userId) => {
   try {
@@ -27,11 +34,15 @@ const addPokemon = async (userId, pokemon) => {
   try {
     let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
     console.log(dbPokeTeam, " este es el team");
-    if (dbPokeTeam.team.length == 6) {
-      return console.log("ya tienes 6 pokemon");
+    if (dbPokeTeam.team.find((element) => element === pokemon) === undefined) {
+      if (dbPokeTeam.team.length == 6) {
+        return console.log("ya tienes 6 pokemon");
+      } else {
+        dbPokeTeam.team.push(pokemon);
+        await dbPokeTeam.save().then(() => console.log("pokemon a;adido"));
+      }
     } else {
-      dbPokeTeam.team.push(pokemon);
-      await dbPokeTeam.save().then(() => console.log("pokemon a;adido"));
+      console.log("el pokemon ya esta en el");
     }
   } catch (err) {
     console.log("no existe");
@@ -56,4 +67,5 @@ module.exports = {
   addPokemon,
   // setTeam,
   getTeamUser,
+  deleteTeam,
 };

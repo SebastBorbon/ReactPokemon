@@ -66,7 +66,7 @@ const SignUp = () => {
           <img src={pokefondo} className="pokefondo" />
         </div>
         <div className="Sebas">
-          <h1 class="ByMe">By Sebastian Borbon</h1>
+          <h1 className="ByMe">By Sebastian Borbon</h1>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SIGNUP, LOGIN, GET_URL, TEAM } from "./constants";
+import { SIGNUP, LOGIN, GET_URL, TEAM, SEARCH } from "./constants";
 
 export const logIn = (user) => {
   return async (dispatch) => {
@@ -38,6 +38,18 @@ export const teams = (userId) => {
   };
 };
 
-export const pokemonSearch = (pokemon) => {};
+export const pokemonSearch = (userId, pokemonName) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`${GET_URL}teams/pokemons`, {
+        userId: userId,
+        pokemonName: pokemonName,
+      });
+      // dispatch({ type: SEARCH, payload: res.data });
+    } catch (err) {
+      return console.log("fallo qui");
+    }
+  };
+};
 
-// var = window.localStorage.getItem('userId')
+// var = window.localStorage.getItem('userId');

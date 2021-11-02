@@ -3,25 +3,25 @@ import { useDispatch } from "react-redux";
 import { pokemonSearch } from "../../redux/actions/sending";
 
 const SearchBar = () => {
-  const [pokemon, setPokemon] = useState("");
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-
-  // useEffect(() =>{
-
-  // })
+  let userId = window.localStorage.getItem("userId");
+  // useEffect(() => {
+  //   dispatch(pokemonSearch(userId, pokemonName));
+  // });
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        dispatch(pokemonSearch(e.target.value));
+        dispatch(pokemonSearch(userId, search));
       }}
     >
       <input
         type="text"
         placeholder="buscar pokemon"
-        value={pokemon}
-        onChange={(e) => setPokemon(e.target.value)}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
 
       <input type="submit" value="Buscar" />

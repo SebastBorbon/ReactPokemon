@@ -1,13 +1,13 @@
-import react, { useState } from "react";
+import "./Pokemon.css";
 
-const Pokemon = ({ pokemonName, pokemonId }) => {
+const Pokemon = ({ pokemonName, pokemonId, sprite }) => {
   return (
-    <div>
-      <div className="nombrePokemon">
-        <p>quien es ese pokemon</p>
-
-        {pokemonName}
+    <div className="cards">
+      <div className="cardPokemon">
+        <button className="btnClose">X</button>
+        <p>{pokemonName}</p>
         {pokemonId}
+        <img src={sprite} alt="no sprite" />
       </div>
     </div>
   );
