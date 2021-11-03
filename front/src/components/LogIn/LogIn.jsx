@@ -59,7 +59,7 @@ const LogIn = () => {
             required
           />
           <button type="submit" className="btnSubmit">
-            Login
+            Sign in
           </button>
         </form>
       </div>

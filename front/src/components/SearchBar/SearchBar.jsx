@@ -1,31 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { pokemonSearch } from "../../redux/actions/sending";
+import { pokemonAdd } from "../../redux/actions/sending";
 
-const SearchBar = () => {
-  const [search, setSearch] = useState("");
+const SearchBar = ({ onSearch }) => {
+  const [pokemon, setPokemon] = useState("");
   const dispatch = useDispatch();
   let userId = window.localStorage.getItem("userId");
-  // useEffect(() => {
-  //   dispatch(pokemonSearch(userId, pokemonName));
-  // });
+
+  // useEffect(
+  //   () => {
+  //     pokemonName.map((pokemon) => {
+  //       console.log(pokemon.name);
+  //     });
+  //     dispatch(pokemonSearch(userId, search));
+  //   },
+  //   [pokemonName, search]
+  // );
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        dispatch(pokemonSearch(userId, search));
-      }}
-    >
-      <input
-        type="text"
-        placeholder="buscar pokemon"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+    <div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSearch(pokemon);
+        }}
+      >
+        <input
+          type="text"
+          placeholder="buscar pokemon"
+          value={pokemon}
+          onChange={(e) => setPokemon(e.target.value)}
+        />
 
-      <input type="submit" value="Buscar" />
-    </form>
+        <input type="submit" value="Buscar" />
+      </form>
+      <button className="addBtn">Deberia aniadir todos</button>
+    </div>
   );
 };
 

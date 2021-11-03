@@ -38,14 +38,14 @@ export const teams = (userId) => {
   };
 };
 
-export const pokemonSearch = (userId, pokemonName) => {
+export const pokemonAdd = (userId, pokemonName) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}teams/pokemons`, {
         userId: userId,
         pokemonName: pokemonName,
       });
-      // dispatch({ type: SEARCH, payload: res.data });
+      dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
       return console.log("fallo qui");
     }

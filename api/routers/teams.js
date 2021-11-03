@@ -11,7 +11,6 @@ router.route("/").post(async (req, res) => {
   console.log("esto es lo que llega en el body", req.body.userId);
 
   let user = await getUser(id);
-  console.log(user);
   if (!user.userName) {
     console.log("no he cargado el user");
   } else {
@@ -40,8 +39,6 @@ router
         sprite: response.data.sprites.front_default,
       };
       await addPokemon(userId, pokemon);
-
-      console.log(pokemon);
       res.send(pokemon);
     } catch (error) {
       console.log("pokemon no encontrado");

@@ -12,6 +12,7 @@ const newUserTeam = async (userId) => {
     console.log("se da;o aca");
   }
 };
+
 const deleteTeam = async () => {
   try {
     await TeamsModel.deletMany({});
@@ -26,7 +27,7 @@ const getTeamUser = async (userId) => {
     console.log("mandamos el equipo");
     return dbTeam.team;
   } catch (err) {
-    console.log("no hay usuario con ese id");
+    console.log("can't connect to DB");
   }
 };
 

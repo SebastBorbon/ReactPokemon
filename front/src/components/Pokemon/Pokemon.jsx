@@ -4,7 +4,7 @@ const Pokemon = ({ pokemonName, pokemonId, sprite }) => {
   return (
     <div className="cards">
       <div className="cardPokemon">
-        <button className="btnClose">X</button>
+        <button className="btnDelete">X</button>
         <p>{pokemonName}</p>
         {pokemonId}
         <img src={sprite} alt="no sprite" />
