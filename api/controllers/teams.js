@@ -34,7 +34,6 @@ const getTeamUser = async (userId) => {
 const addPokemon = async (userId, pokemon) => {
   try {
     let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
-    console.log(dbPokeTeam, " este es el team");
     if (dbPokeTeam.team.find((element) => element === pokemon) === undefined) {
       if (dbPokeTeam.team.length == 6) {
         return console.log("ya tienes 6 pokemon");
@@ -63,10 +62,22 @@ const addPokemon = async (userId, pokemon) => {
 //   }
 // };
 
+const deletePokemonAt = async (userId, index) => {
+  let [err, dbTeam] = await TeamsModel.findOne({ userId: userId }).exec();
+  if (err || !dbTeam) {
+    return err;
+  }
+  if (dbTeam.team[index]) {
+    dbTeam.team.splice(index, 1);
+  }
+  await dbTeam.save();
+};
+
 module.exports = {
   newUserTeam,
   addPokemon,
   // setTeam,
   getTeamUser,
   deleteTeam,
+  deletePokemonAt,
 };

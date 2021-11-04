@@ -3,12 +3,15 @@ const router = express.Router();
 const passport = require("passport");
 require("../auth")(passport);
 const axios = require("axios");
-const { setTeam, getTeamUser, addPokemon } = require("../controllers/teams");
+const {
+  deletePokemonAt,
+  getTeamUser,
+  addPokemon,
+} = require("../controllers/teams");
 const { getUser } = require("../controllers/users");
 
 router.route("/").post(async (req, res) => {
   const id = req.body.userId;
-  console.log("esto es lo que llega en el body", req.body.userId);
 
   let user = await getUser(id);
   if (!user.userName) {
@@ -48,8 +51,11 @@ router
     res.send("estas en pokemons");
   });
 
-router.route("/pokemons/:pokeid").delete(() => {
-  res.send("hello word");
+router.route("/pokemons/:pokeid").delete(async (req, res) => {
+  let pokemonId = req.body.pokemonId;
+  let userId = req.body.userId;
+  try {
+  } catch {}
 });
 
 exports.router = router;

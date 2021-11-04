@@ -36,7 +36,7 @@ router.route("/login").post(async (req, res) => {
     return res.status(400).json({ message: "Falta contra" });
   }
   //comprobar credenciales
-  console.log("el usuario buscado es", req.body);
+
   let user = await checkUserCredentials(email, password);
   //si son validas generar un JWT
   return res.send(user);

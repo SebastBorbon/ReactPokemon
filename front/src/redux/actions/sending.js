@@ -52,4 +52,11 @@ export const pokemonAdd = (userId, pokemonName) => {
   };
 };
 
+export const deletePokemon = (userId, pokemonId) => {
+  return async (dispatch) => {
+    try {
+    } catch {}
+  };
+};
+
 // var = window.localStorage.getItem('userId');
