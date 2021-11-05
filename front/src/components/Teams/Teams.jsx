@@ -47,7 +47,7 @@ const Teams = () => {
 
   return (
     <div>
-      <div>
+      <div className="SearchBar">
         <SearchBar onSearch={onSearch} />
       </div>
       <div className="PokemonSearched">
@@ -63,7 +63,8 @@ const Teams = () => {
             })
           : console.log("no se pudo renderizar el equipo")}
       </div>
-      <h1>Tu equipo</h1>
+
+      <h1 className="textTeam">Your team</h1>
       <div className="Team">
         {teamPokemons !== undefined
           ? teamPokemons.map((pokemon) => {

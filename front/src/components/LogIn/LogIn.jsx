@@ -62,13 +62,13 @@ const LogIn = () => {
           <button type="submit" className="btnSubmit">
             Sign in
           </button>
-          <div className="pokemon">
-            <img src={pokefondo} className="pokefondo" />
-          </div>
-          <div className="Sebas">
-            <h1 className="ByMe">By Sebastian Borbon</h1>
-          </div>
         </form>
+        <div className="pokemon">
+          <img src={pokefondo} className="pokefondo" />
+        </div>
+        <div className="Sebas">
+          <h1 className="ByMe">By Sebastian Borbon</h1>
+        </div>
       </div>
     </div>
   );

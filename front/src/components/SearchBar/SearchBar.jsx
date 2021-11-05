@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { pokemonAdd } from "../../redux/actions/sending";
+import "./searchBar.css";
 
 const SearchBar = ({ onSearch }) => {
   const [pokemon, setPokemon] = useState("");
@@ -18,23 +18,37 @@ const SearchBar = ({ onSearch }) => {
   // );
 
   return (
-    <div>
+    <div id="cover">
       <form
+        method="get"
+        action=""
         onSubmit={(e) => {
           e.preventDefault();
           onSearch(pokemon);
         }}
       >
-        <input
-          type="text"
-          placeholder="buscar pokemon"
-          value={pokemon}
-          onChange={(e) => setPokemon(e.target.value)}
-        />
-
-        <input type="submit" value="Buscar" />
+        <div className="tb">
+          <div className="td">
+            <input
+              id="search"
+              type="text"
+              placeholder="Search Pokemon"
+              value={pokemon}
+              onChange={(e) => setPokemon(e.target.value)}
+              required
+            />
+          </div>
+          <div className="td" id="s-cover">
+            <button className="btnSearch" type="submit" value="Buscar">
+              <div id="s-circle"></div>
+              <span></span>
+            </button>
+          </div>
+        </div>
       </form>
-      <button className="addBtn">Deberia aniadir todos</button>
+      {/* <button type="submit" className="addBtn">
+        Deberia anadir todos
+      </button> */}
     </div>
   );
 };
