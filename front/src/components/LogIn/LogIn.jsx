@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./LogIn.scss";
 import { logIn } from "../../redux/actions/sending";
 import { useHistory } from "react-router";
+import pokefondo from "../../public/pokefondo.png";
 
 const LogIn = () => {
   const [error, setError] = useState("");
@@ -61,6 +62,12 @@ const LogIn = () => {
           <button type="submit" className="btnSubmit">
             Sign in
           </button>
+          <div className="pokemon">
+            <img src={pokefondo} className="pokefondo" />
+          </div>
+          <div className="Sebas">
+            <h1 className="ByMe">By Sebastian Borbon</h1>
+          </div>
         </form>
       </div>
     </div>

@@ -49,18 +49,18 @@ const addPokemon = async (userId, pokemon) => {
   }
 };
 
-// const setTeam = async (userId, team) => {
-//   let [err, dbTeam] = await to(
-//     TeamsModel.updateOne(
-//       { userId: userId },
-//       { $set: { team: team } },
-//       { upsert: true }
-//     ).exec()
-//   );
-//   if (err || !dbTeam) {
-//     return reject(err);
-//   }
-// };
+const setTeam = async (userId, team) => {
+  let [err, dbTeam] = await to(
+    TeamsModel.updateOne(
+      { userId: userId },
+      { $set: { team: team } },
+      { upsert: true }
+    ).exec()
+  );
+  if (err || !dbTeam) {
+    return reject(err);
+  }
+};
 
 const deletePokemonAt = async (userId, index) => {
   let [err, dbTeam] = await TeamsModel.findOne({ userId: userId }).exec();
@@ -76,7 +76,7 @@ const deletePokemonAt = async (userId, index) => {
 module.exports = {
   newUserTeam,
   addPokemon,
-  // setTeam,
+  setTeam,
   getTeamUser,
   deleteTeam,
   deletePokemonAt,
