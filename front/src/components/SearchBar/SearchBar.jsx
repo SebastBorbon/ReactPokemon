@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+// import { useDispatch } from "react-redux";
 import "./searchBar.css";
 
 const SearchBar = ({ onSearch }) => {
   const [pokemon, setPokemon] = useState("");
-  const dispatch = useDispatch();
-  let userId = window.localStorage.getItem("userId");
+  // const dispatch = useDispatch();
+  // let userId = window.localStorage.getItem("userId");
 
   // useEffect(
   //   () => {
