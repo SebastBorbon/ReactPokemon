@@ -3,3 +3,4 @@ export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
 export const TEAM = "TEAM";
 export const SEARCH = "SEARCH";
+export const DELETEPK = "DELETEPK";

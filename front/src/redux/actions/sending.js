@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SIGNUP, LOGIN, GET_URL, TEAM, SEARCH } from "./constants";
+import { SIGNUP, LOGIN, GET_URL, TEAM } from "./constants";
 
 export const logIn = (user) => {
   return async (dispatch) => {
@@ -55,7 +55,14 @@ export const pokemonAdd = (userId, pokemonName) => {
 export const deletePokemon = (userId, pokemonId) => {
   return async (dispatch) => {
     try {
-    } catch {}
+      await axios.delete(`${GET_URL}teams/pokemons/pokeId`, {
+        userId: userId,
+        pokemonId: pokemonId,
+      });
+      dispatch({ type: TEAM, payload: res.data });
+    } catch (err) {
+      return console.log("fallo en  el delete Pk");
+    }
   };
 };
 

@@ -52,10 +52,14 @@ router
   });
 
 router.route("/pokemons/:pokeid").delete(async (req, res) => {
+  //Deberia ser query params
   let pokemonId = req.body.pokemonId;
   let userId = req.body.userId;
   try {
-  } catch {}
+    await deletePokemonAt(pokemonId, userId);
+  } catch (err) {
+    return console.log(err);
+  }
 });
 
 exports.router = router;

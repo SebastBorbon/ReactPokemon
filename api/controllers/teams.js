@@ -71,6 +71,7 @@ const deletePokemonAt = async (userId, index) => {
     dbTeam.team.splice(index, 1);
   }
   await dbTeam.save();
+  return dbTeam.team;
 };
 
 module.exports = {

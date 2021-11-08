@@ -1,5 +1,5 @@
 // import { useReducer } from "react";
-import { LOGIN, SIGNUP, TEAM, SEARCH } from "../actions/constants";
+import { LOGIN, SIGNUP, TEAM } from "../actions/constants";
 
 const initialState = {
   logged: false,
@@ -27,11 +27,7 @@ export function reducer(state = initialState, action) {
         ...state,
         team: action.payload,
       };
-    case SEARCH:
-      return {
-        ...state,
-        search: action.payload,
-      };
+
     default:
       return state;
   }
