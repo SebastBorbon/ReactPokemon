@@ -26,3 +26,14 @@
   width: 30%;
   height: 30%;
 }
+
+.btnLogOut {
+  background-color: white;
+  border-radius: 20%;
+  height: 40px;
+}
+.btnLogOut {
+  position: absolute;
+  margin-top: 40%;
+  margin-left: 10%;
+}

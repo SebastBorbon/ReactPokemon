@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { teams } from "../../redux/actions/sending";
+import { useHistory } from "react-router";
 import SearchBar from "../SearchBar/SearchBar";
 import Pokemon from "../Pokemon/Pokemon";
 import SearchPk from "../SearchPk/SearchPk";
@@ -13,8 +14,13 @@ const Teams = () => {
   let userId = window.localStorage.getItem("userId");
   const teamPokemons = useSelector((state) => state.team.team);
   const [searchPokemons, setSearchPokemons] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
+    // if (!userId) {
+    //   history.push("/Login");
+    //   window.location.reload();
+    // } else {
     if (teamPokemons === undefined) {
       dispatch(teams(userId));
     } else {
@@ -41,9 +47,18 @@ const Teams = () => {
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  // };
+  const logOut = () => {
+    if (userId) {
+      window.localStorage.removeItem(userId);
+      history.push("/Login");
+      window.location.reload();
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    logOut();
+  };
 
   return (
     <div>
@@ -77,6 +92,11 @@ const Teams = () => {
               );
             })
           : console.log("no se pudo renderizar el equipo")}
+      </div>
+      <div className="LogOut">
+        <button className="btnLogOut" onClick={(e) => handleSubmit(e)}>
+          Log out
+        </button>
       </div>
     </div>
   );

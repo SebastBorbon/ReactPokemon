@@ -55,7 +55,7 @@ export const pokemonAdd = (userId, pokemonName) => {
 export const deletePokemon = (userId, pokemonId) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`${GET_URL}teams/pokemons`, {
+      const res = await axios.delete(`${GET_URL}teams/pokemons`, {
         userId: userId,
         pokemonId: pokemonId,
       });
