@@ -51,12 +51,17 @@ router
     res.send("estas en pokemons");
   });
 
-router.route("/pokemons/:pokeid").delete(async (req, res) => {
+router.route("/pokemons/").delete(async (req, res) => {
   //Deberia ser query params
   let pokemonId = req.body.pokemonId;
   let userId = req.body.userId;
   try {
     await deletePokemonAt(pokemonId, userId);
+    let user = await getUser(userId);
+    res.send({
+      userName: user.userName,
+      team: await getTeamUser(id),
+    });
   } catch (err) {
     return console.log(err);
   }

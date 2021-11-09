@@ -22,7 +22,7 @@ const SearchPk = ({ pokemonName, key, sprite }) => {
             dispatch(pokemonAdd(userId, pokemonName));
           }}
         >
-          AddPk
+          Add
         </button>
       </div>
     </div>
