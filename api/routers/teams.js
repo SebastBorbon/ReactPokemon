@@ -51,16 +51,22 @@ router
     res.send("estas en pokemons");
   });
 
-router.route("/pokemons/").delete(async (req, res) => {
-  //Deberia ser query params
-  let pokemonId = req.body.pokemonId;
-  let userId = req.body.userId;
+router.route("/pokemons").delete(async (req, res) => {
+  // let pokemonId = req.body.pokemonId;
+  // let userId = req.body.userId;
+  // console.log(
+  //   req.body.userId,
+  //   req.body.pokemonId,
+  //   "es el pokemon que quieres borrar"
+  // );
+
   try {
-    await deletePokemonAt(pokemonId, userId);
-    let user = await getUser(userId);
+    await deletePokemonAt(req.body.userId, req.body.pokemonId);
+    let user = await getUser(req.body.userId);
+    console.log(user);
     res.send({
-      userName: user.userName,
-      team: await getTeamUser(id),
+      userName: user.email,
+      team: await getTeamUser(req.body.userId),
     });
   } catch (err) {
     return console.log(err);

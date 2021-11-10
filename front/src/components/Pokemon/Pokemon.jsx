@@ -2,7 +2,7 @@ import "./Pokemon.css";
 import { useDispatch } from "react-redux";
 import { deletePokemon } from "../../redux/actions/sending";
 
-const Pokemon = ({ pokemonName, pokemonId, sprite }) => {
+const Pokemon = ({ pokemonName, pokeId, sprite }) => {
   const dispatch = useDispatch();
   let userId = window.localStorage.getItem("userId");
   return (
@@ -13,13 +13,14 @@ const Pokemon = ({ pokemonName, pokemonId, sprite }) => {
           onClick={(e) => {
             e.preventDefault();
             console.log("el pokemon anadido sera", pokemonName);
-            dispatch(deletePokemon(userId, pokemonId));
+            console.log("el pokemon eliminado es", pokeId);
+            dispatch(deletePokemon(userId, pokeId));
           }}
         >
           X
         </button>
         <p>{pokemonName}</p>
-        {pokemonId}
+        <p>{pokeId}</p>
         <img src={sprite} alt="no sprite" />
       </div>
     </div>

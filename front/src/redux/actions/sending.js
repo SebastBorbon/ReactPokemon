@@ -56,8 +56,10 @@ export const deletePokemon = (userId, pokemonId) => {
   return async (dispatch) => {
     try {
       const res = await axios.delete(`${GET_URL}teams/pokemons`, {
-        userId: userId,
-        pokemonId: pokemonId,
+        data: {
+          userId: userId,
+          pokemonId: pokemonId,
+        },
       });
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {

@@ -70,7 +70,7 @@ const Teams = () => {
           ? searchPokemons.map((pokemon) => {
               return (
                 <SearchPk
-                  key={pokemon.pokeid}
+                  pokeId={pokemon.pokeId}
                   pokemonName={pokemon.name}
                   sprite={pokemon.sprite}
                 />
@@ -85,7 +85,7 @@ const Teams = () => {
           ? teamPokemons.map((pokemon) => {
               return (
                 <Pokemon
-                  key={pokemon.pokeid}
+                  pokeId={pokemon.pokeId}
                   pokemonName={pokemon.name}
                   sprite={pokemon.sprite}
                 />

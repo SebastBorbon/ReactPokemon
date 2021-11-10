@@ -62,16 +62,24 @@ const setTeam = async (userId, team) => {
   }
 };
 
-const deletePokemonAt = async (userId, index) => {
-  let [err, dbTeam] = await TeamsModel.findOne({ userId: userId }).exec();
-  if (err || !dbTeam) {
-    return err;
+const deletePokemonAt = async (userId, pokemonId) => {
+  console.log(userId, pokemonId, "es el pokemon a borrar");
+  try {
+    dbTeam = await TeamsModel.findOne({ userId: userId })
+      .findOne({
+        pokeId: pokemonId,
+      })
+      .findOneAndRemove({ pokeId: pokemonId });
+
+    console.log(dbTeam);
+  } catch (err) {
+    console.log(err, "fallo el deletePkAt");
   }
-  if (dbTeam.team[index]) {
-    dbTeam.team.splice(index, 1);
-  }
-  await dbTeam.save();
-  return dbTeam.team;
+  // if (dbTeam.team[index]) {
+  //   dbTeam.team.splice(index, 1);
+  // }
+  // await dbTeam.save();
+  // return dbTeam.team;
 };
 
 module.exports = {
