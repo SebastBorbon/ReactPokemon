@@ -5,6 +5,7 @@ const TeamsModel = mongoose.model("TeamsModel", {
 });
 
 const newUserTeam = async (userId) => {
+  //when a  new user is created, the team also is created over that user
   let newTeam = new TeamsModel({ userId: userId, team: [] });
   try {
     await newTeam.save().then(() => console.log("nuevo equipo creado"));
@@ -23,6 +24,7 @@ const deleteTeam = async () => {
 
 const getTeamUser = async (userId) => {
   try {
+    //try to take the user team and render it
     let dbTeam = await TeamsModel.findOne({ userId: userId });
     console.log("mandamos el equipo");
     return dbTeam.team;
@@ -33,9 +35,10 @@ const getTeamUser = async (userId) => {
 
 const addPokemon = async (userId, pokemon) => {
   try {
+    // look for a team in the db that no contains more than 6 pokemon in it, and add the pokemon to them
     let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
     if (dbPokeTeam.team.find((element) => element === pokemon) === undefined) {
-      if (dbPokeTeam.team.length == 6) {
+      if (dbPokeTeam.tam.length == 6) {
         return console.log("ya tienes 6 pokemon");
       } else {
         dbPokeTeam.team.push(pokemon);
@@ -64,6 +67,7 @@ const setTeam = async (userId, team) => {
 
 const deletePokemonAt = async (userId, pokemonId) => {
   try {
+    //look if the pokemon already exists in the team and because if an array splice the array to delete the pokemon from the team
     dbTeam = await TeamsModel.findOne({ userId: userId });
     console.log(dbTeam.team);
     let index = dbTeam.team.map((pokemon) => pokemon.pokeId).indexOf(pokemonId);
