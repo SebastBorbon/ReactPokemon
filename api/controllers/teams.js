@@ -8,9 +8,9 @@ const newUserTeam = async (userId) => {
   //when a  new user is created, the team also is created over that user
   let newTeam = new TeamsModel({ userId: userId, team: [] });
   try {
-    await newTeam.save().then(() => console.log("nuevo equipo creado"));
+    await newTeam.save().then(() => console.log("new team created"));
   } catch (err) {
-    console.log("se da;o aca");
+    console.log("cant create new team ");
   }
 };
 
@@ -26,7 +26,7 @@ const getTeamUser = async (userId) => {
   try {
     //try to take the user team and render it
     let dbTeam = await TeamsModel.findOne({ userId: userId });
-    console.log("mandamos el equipo");
+    console.log("team sended");
     return dbTeam.team;
   } catch (err) {
     console.log("can't connect to DB");
@@ -39,20 +39,21 @@ const addPokemon = async (userId, pokemon) => {
     let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
     if (dbPokeTeam.team.find((element) => element === pokemon) === undefined) {
       if (dbPokeTeam.tam.length == 6) {
-        return console.log("ya tienes 6 pokemon");
+        return console.log("user already got 6 pokemon");
       } else {
         dbPokeTeam.team.push(pokemon);
-        await dbPokeTeam.save().then(() => console.log("pokemon a;adido"));
+        await dbPokeTeam.save().then(() => console.log("pokemon added"));
       }
     } else {
-      console.log("el pokemon ya esta en el");
+      console.log("already have that pokemon");
     }
   } catch (err) {
-    console.log("no existe");
+    console.log("don't exist");
   }
 };
 
 const setTeam = async (userId, team) => {
+  //set the  team in the order that the user want
   let [err, dbTeam] = await to(
     TeamsModel.updateOne(
       { userId: userId },
@@ -71,14 +72,14 @@ const deletePokemonAt = async (userId, pokemonId) => {
     dbTeam = await TeamsModel.findOne({ userId: userId });
     console.log(dbTeam.team);
     let index = dbTeam.team.map((pokemon) => pokemon.pokeId).indexOf(pokemonId);
-    console.log("el index a borrar es", index, "que");
+
     if (dbTeam.team[index]) {
       dbTeam.team.splice(index, 1);
     }
     await dbTeam.save();
     return dbTeam.team;
   } catch (err) {
-    console.log("fallo el deletePkAt");
+    console.log(" deletePkAt failed");
   }
 };
 

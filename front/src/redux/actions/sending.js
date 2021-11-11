@@ -1,6 +1,8 @@
 import axios from "axios";
 import { SIGNUP, LOGIN, GET_URL, TEAM } from "./constants";
 
+//data send to the backend and save the response in the reducer
+//I used axios to post in the backend server
 export const logIn = (user) => {
   return async (dispatch) => {
     try {
@@ -67,5 +69,3 @@ export const deletePokemon = (userId, pokemonId) => {
     }
   };
 };
-
-// var = window.localStorage.getItem('userId');

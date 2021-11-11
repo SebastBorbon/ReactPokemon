@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//I setup the dnfo nedeed to connect with te database on mongo
 const url = `mongodb+srv://admin:1234@cluster0.ob3da.mongodb.net/mydatabase?retryWrites=true&w=majority`;
 
 const connectionParams = {

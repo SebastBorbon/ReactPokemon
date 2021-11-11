@@ -10,7 +10,9 @@ const UserModel = mongoose.model("UserModel", {
 });
 
 const registerUser = async (userName, password) => {
-  //save in the database
+  //save in the database  in mongoDB created with mongoose and using mongoose library to update
+  //the password is hashed with bcrypt to prevalize safety
+  //uuidv4 helps to never repeat a ID
 
   let hashedPwd = await bcrypt.hash(password, 10);
   let userId = uuidv4();
@@ -23,7 +25,7 @@ const registerUser = async (userName, password) => {
     await newUser.save().then(() => console.log("hecho rey"));
     await newUserTeam(userId);
   } catch {
-    console.log("no ha sido posible");
+    console.log("Can't create a new User");
   }
 };
 
@@ -32,7 +34,7 @@ const getUser = async (userId) => {
     const findedUser = await UserModel.findOne({ userId: userId });
     return findedUser;
   } catch (err) {
-    console.log("no tengo usuario");
+    console.log("Don't get any user from DB");
   }
 };
 
@@ -40,29 +42,30 @@ const getUserIdFromEmail = async (email) => {
   try {
     let userByName = await UserModel.findOne({ userName: email });
     if (!userByName) {
-      console.log("usuario incorrecto");
+      console.log("incorrect user");
     } else {
       return userByName;
     }
   } catch {
-    console.log("no se pudo conectar a la BD");
+    console.log("Can't connect to BD");
   }
 };
 
 const checkUserCredentials = async (email, password) => {
+  //check user and compare the password with the hashed one saved in the DB
   try {
     let user = await getUserIdFromEmail(email);
     if (user) {
       let userPassword = await bcrypt.compare(password, user.password);
       if (userPassword) {
-        console.log("usuario encontrado", user);
+        console.log("user founded", user);
         return user;
       } else {
-        console.log("contrasena erronea");
+        console.log("incorrect Password");
       }
     }
   } catch {
-    console.log("usuario no valido");
+    console.log("invalid user");
   }
 };
 

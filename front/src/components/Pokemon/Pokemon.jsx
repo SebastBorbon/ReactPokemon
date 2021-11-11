@@ -4,6 +4,7 @@ import { deletePokemon } from "../../redux/actions/sending";
 
 const Pokemon = ({ pokemonName, pokeId, sprite }) => {
   const dispatch = useDispatch();
+  //I saved the userId on localStorage to mantain the session active
   let userId = window.localStorage.getItem("userId");
   return (
     <div className="cards">

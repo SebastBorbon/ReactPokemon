@@ -7,7 +7,7 @@ const initialState = {
   team: [],
   search: [],
 };
-
+//we update the states with the backend response
 export function reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN:

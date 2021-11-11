@@ -7,13 +7,6 @@ const {
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-router.route("/").get((req, res) => {
-  res.send("estas en auth");
-});
-router.route("/login").get((req, res) => {
-  res.send("estas en el login");
-});
-
 router.route("/signup").post(async (req, res) => {
   const { email, password } = req.body;
   //comprobations if user exists
@@ -38,7 +31,7 @@ router.route("/login").post(async (req, res) => {
   //comprobar credenciales
 
   let user = await checkUserCredentials(email, password);
-  //si son validas generar un JWT
+  //si all the user data is correct, we send back the user
   return res.send(user);
   // const token = jwt.sign({ userID: user }, "secret", { expiresIn: "1d" });
   // return res.send(token);
