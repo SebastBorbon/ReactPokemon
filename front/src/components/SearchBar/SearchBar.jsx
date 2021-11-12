@@ -5,17 +5,6 @@ import "./searchBar.css";
 const SearchBar = ({ onSearch }) => {
   const [pokemon, setPokemon] = useState("");
   // const dispatch = useDispatch();
-  // let userId = window.localStorage.getItem("userId");
-
-  // useEffect(
-  //   () => {
-  //     pokemonName.map((pokemon) => {
-  //       console.log(pokemon.name);
-  //     });
-  //     dispatch(pokemonSearch(userId, search));
-  //   },
-  //   [pokemonName, search]
-  // );
 
   return (
     <div id="cover">

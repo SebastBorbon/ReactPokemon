@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 const SearchPk = ({ pokemonName, key, sprite }) => {
   const dispatch = useDispatch();
+
   let userId = window.localStorage.getItem("userId");
   return (
     <div className="cards">

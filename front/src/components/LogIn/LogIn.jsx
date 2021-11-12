@@ -10,10 +10,10 @@ const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-
+  //used for mantain the session active
   const logged = useSelector((state) => state.user.userId);
   const history = useHistory();
-
+  //redirect when the user connect
   useEffect(() => {
     if (logged) {
       history.push("/teams");
@@ -29,7 +29,7 @@ const LogIn = () => {
     };
     dispatch(logIn(data));
   };
-
+  //verify if the user is an email
   function validateUser(value) {
     if (!/\S+@\S+\.\S+/.test(value)) {
       setError("User needs to be an email");
