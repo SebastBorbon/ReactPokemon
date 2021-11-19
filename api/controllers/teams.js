@@ -37,6 +37,7 @@ const addPokemon = async (userId, pokemon) => {
   try {
     // look for a team in the db that no contains more than 6 pokemon in it, and add the pokemon to them
     let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
+    //should use findIndex to search for ID
     if (dbPokeTeam.team.find((element) => element === pokemon) === undefined) {
       if (dbPokeTeam.tam.length == 6) {
         return console.log("user already got 6 pokemon");

@@ -4,6 +4,7 @@ import { pokemonAdd } from "../../redux/actions/sending";
 import { useDispatch } from "react-redux";
 
 const SearchPk = ({ pokemonName, key, sprite }) => {
+  //should add a validation that don't dispatch if the pokemon already exists
   const dispatch = useDispatch();
 
   let userId = window.localStorage.getItem("userId");
