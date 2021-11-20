@@ -9,7 +9,6 @@ import "./Teams.css";
 import axios from "axios";
 
 const Teams = () => {
-  const [team, setTeam] = useState([]);
   const dispatch = useDispatch();
   let userId = window.localStorage.getItem("userId");
   const teamPokemons = useSelector((state) => state.team.team);
@@ -24,11 +23,11 @@ const Teams = () => {
     if (teamPokemons === undefined) {
       dispatch(teams(userId));
     } else {
-      teamPokemons.map((pokemon) => {
+      teamPokemons.forEach((pokemon) => {
         console.log(pokemon.name);
       });
     }
-  }, [team, teamPokemons, searchPokemons]);
+  }, [dispatch, userId, teamPokemons, searchPokemons]);
 
   const onSearch = async (searchPk) => {
     try {
@@ -50,7 +49,7 @@ const Teams = () => {
   const logOut = () => {
     if (userId) {
       window.localStorage.removeItem(userId);
-      history.push("/Login");
+      history.push("/");
       window.location.reload();
     }
   };

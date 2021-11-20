@@ -9,10 +9,7 @@ import Teams from "./components/Teams/Teams";
 function App() {
   return (
     <>
-      <Route exact path="/">
-        <Redirect to="/login" />
-      </Route>
-      <Route exact path="/login" component={LogIn} />
+      <Route exact path="/" component={LogIn} />
       <Route exact path="/teams" component={Teams} />
       <Route exact path="/signup" component={SignUp} />
     </>
