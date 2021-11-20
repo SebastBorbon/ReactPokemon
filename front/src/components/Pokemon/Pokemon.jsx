@@ -13,8 +13,6 @@ const Pokemon = ({ pokemonName, pokeId, sprite }) => {
           className="btnDelete"
           onClick={(e) => {
             e.preventDefault();
-            console.log("el pokemon anadido sera", pokemonName);
-            console.log("el pokemon eliminado es", pokeId);
             dispatch(deletePokemon(userId, pokeId));
           }}
         >
