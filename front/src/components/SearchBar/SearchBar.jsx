@@ -35,9 +35,6 @@ const SearchBar = ({ onSearch }) => {
           </div>
         </div>
       </form>
-      {/* <button type="submit" className="addBtn">
-        Deberia anadir todos
-      </button> */}
     </div>
   );
 };
