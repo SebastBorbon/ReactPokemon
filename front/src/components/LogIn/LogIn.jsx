@@ -62,6 +62,14 @@ const LogIn = () => {
           <button type="submit" className="btnSubmit">
             Sign in
           </button>
+          <button
+            type="submit"
+            className="btnSubmit"
+            id="signUp"
+            onClick={(e) => history.push("/signup")}
+          >
+            Sign Up
+          </button>
         </form>
         <div className="pokemon">
           <img src={pokefondo} alt="cant charge img" className="pokefondo" />
