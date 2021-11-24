@@ -19,7 +19,7 @@ export const signUp = (user) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}auth/signup`, user);
-      console.log(res.data);
+
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: SIGNUP, payload: res.data });
     } catch (err) {
@@ -32,7 +32,7 @@ export const teams = (userId) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}teams`, { userId: userId });
-      console.log(res.data);
+
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
       return console.log(err);
@@ -49,7 +49,7 @@ export const pokemonAdd = (userId, pokemonName) => {
       });
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
-      return console.log("fallo qui");
+      return console.log("fallo pokemonAdd");
     }
   };
 };

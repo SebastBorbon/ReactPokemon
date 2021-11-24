@@ -9,15 +9,16 @@ import "./Teams.css";
 import axios from "axios";
 
 const Teams = () => {
+  const [searchPokemons, setSearchPokemons] = useState([]);
   const dispatch = useDispatch();
   let userId = window.localStorage.getItem("userId");
   const teamPokemons = useSelector((state) => state.team.team);
-  const [searchPokemons, setSearchPokemons] = useState([]);
+
   const history = useHistory();
 
   useEffect(() => {
     // if (!userId) {
-    //   history.push("/Login");
+    //   history.push("/");
     //   window.location.reload();
     // } else {
     if (teamPokemons === undefined) {
@@ -29,18 +30,18 @@ const Teams = () => {
     }
   }, [dispatch, userId, teamPokemons, searchPokemons]);
 
-  const onSearch = async (searchPk) => {
+  const onSearch = async (pokeSearched) => {
     try {
       const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${searchPk}`
+        `https://pokeapi.co/api/v2/pokemon/${pokeSearched.toLowerCase()}`
       );
       const pokemon = {
-        name: searchPk,
+        name: pokeSearched.toLowerCase(),
         pokeId: response.data.id,
         sprite: response.data.sprites.front_default,
       };
-      setSearchPokemons((oldPokemon) => [...oldPokemon, pokemon]);
-      console.log(searchPokemons, " es el pokemon enviado");
+
+      setSearchPokemons(() => [pokemon]);
     } catch (err) {
       console.log("no se pudo hacer la solicitud");
     }
@@ -75,7 +76,7 @@ const Teams = () => {
                 />
               );
             })
-          : console.log("no se pudo renderizar el equipo")}
+          : console.log()}
       </div>
 
       <h1 className="textTeam">Your team</h1>
@@ -90,7 +91,7 @@ const Teams = () => {
                 />
               );
             })
-          : console.log("no se pudo renderizar el equipo")}
+          : console.log()}
       </div>
       <div className="LogOut">
         <button className="btnLogOut" onClick={(e) => handleSubmit(e)}>
