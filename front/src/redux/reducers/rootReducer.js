@@ -2,6 +2,8 @@
 import { LOGIN, SIGNUP, TEAM } from "../actions/constants";
 
 const initialState = {
+  logged: false,
+  user: [],
   team: [],
 };
 //I update the states with the backend response
@@ -24,7 +26,6 @@ export function reducer(state = initialState, action) {
         ...state,
         team: action.payload,
       };
-
     default:
       return state;
   }

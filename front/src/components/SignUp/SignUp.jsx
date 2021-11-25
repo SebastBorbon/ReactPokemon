@@ -58,8 +58,17 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <button className="btnSignUp" type="submit" className="btnSubmit">
             Sign Up
+          </button>
+          <button
+            type="submit"
+            className="btnSubmit"
+            id="signUp"
+            onClick={(e) => history.push("/")}
+          >
+            Login
           </button>
         </form>
         <div className="pokemon">

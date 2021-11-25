@@ -7,6 +7,7 @@ export const logIn = (user) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}auth/login`, user);
+      console.log(res.data);
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: LOGIN, payload: res.data });
     } catch (err) {
@@ -19,7 +20,6 @@ export const signUp = (user) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}auth/signup`, user);
-
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: SIGNUP, payload: res.data });
     } catch (err) {
@@ -32,7 +32,7 @@ export const teams = (userId) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}teams`, { userId: userId });
-
+      console.log(res.data);
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
       return console.log(err);
@@ -40,7 +40,7 @@ export const teams = (userId) => {
   };
 };
 
-export const pokemonAdd = (userId, pokemonName) => {
+export const pokemonAdd = (userId, pokemonName, pokeId) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}teams/pokemons`, {

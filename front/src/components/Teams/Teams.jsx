@@ -11,8 +11,9 @@ import axios from "axios";
 const Teams = () => {
   const [searchPokemons, setSearchPokemons] = useState([]);
   const dispatch = useDispatch();
-  let userId = window.localStorage.getItem("userId");
   const teamPokemons = useSelector((state) => state.team.team);
+
+  let userId = window.localStorage.getItem("userId");
 
   const history = useHistory();
 

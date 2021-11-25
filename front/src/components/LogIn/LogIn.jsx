@@ -60,7 +60,7 @@ const LogIn = () => {
             required
           />
           <button type="submit" className="btnSubmit">
-            Sign in
+            Login
           </button>
           <button
             type="submit"
