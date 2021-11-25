@@ -12,20 +12,20 @@ const { getUser } = require("../controllers/users");
 
 router.route("/").post(async (req, res) => {
   const id = req.body.userId;
-
-  let user = await getUser(id);
-  if (!user.userName) {
-    console.log("no he cargado el user");
-  } else {
-    res.send({
-      userName: user.userName,
-      team: await getTeamUser(id),
-    });
+  try {
+    let user = await getUser(id);
+    if (user.userName === undefined) {
+      console.log("no he cargado el user");
+    } else {
+      res.send({
+        userName: user.userName,
+        team: await getTeamUser(id),
+      });
+    }
+  } catch (err) {
+    console.log("error en el teams");
   }
 });
-// .put(async (req, res) => {
-//   await setTeam(req.body.user, req.body.team);
-// });
 
 router
   .route("/pokemons")
