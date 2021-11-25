@@ -13,17 +13,21 @@ const registerUser = async (userName, password) => {
   //save in the database  in mongoDB created with mongoose and using mongoose library to update
   //the password is hashed with bcrypt to prevalize safety
   //uuidv4 helps to never repeat a ID
-
-  let hashedPwd = await bcrypt.hash(password, 10);
-  let userId = uuidv4();
-  let newUser = new UserModel({
-    userId: userId,
-    userName: userName,
-    password: hashedPwd,
-  });
   try {
-    await newUser.save().then(() => console.log("hecho rey"));
-    await newUserTeam(userId);
+    let user = await UserModel.findOne({ userName: userName });
+    if (user) {
+      return true;
+    } else {
+      let hashedPwd = await bcrypt.hash(password, 10);
+      let userId = uuidv4();
+      let newUser = new UserModel({
+        userId: userId,
+        userName: userName,
+        password: hashedPwd,
+      });
+      await newUser.save().then(() => console.log("hecho rey"));
+      await newUserTeam(userId);
+    }
   } catch {
     console.log("Can't create a new User");
   }
@@ -32,6 +36,7 @@ const registerUser = async (userName, password) => {
 const getUser = async (userId) => {
   try {
     const findedUser = await UserModel.findOne({ userId: userId });
+    console.log(findedUser);
     return findedUser;
   } catch (err) {
     console.log("Don't get any user from DB");
@@ -42,7 +47,7 @@ const getUserIdFromEmail = async (email) => {
   try {
     let userByName = await UserModel.findOne({ userName: email });
     if (!userByName) {
-      console.log("incorrect user");
+      res.send("incorrect user");
     } else {
       return userByName;
     }
@@ -58,7 +63,6 @@ const checkUserCredentials = async (email, password) => {
     if (user) {
       let userPassword = await bcrypt.compare(password, user.password);
       if (userPassword) {
-        console.log("user founded", user);
         return user;
       } else {
         console.log("incorrect Password");

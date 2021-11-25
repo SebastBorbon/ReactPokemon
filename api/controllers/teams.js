@@ -14,19 +14,10 @@ const newUserTeam = async (userId) => {
   }
 };
 
-const deleteTeam = async () => {
-  try {
-    await TeamsModel.deletMany({});
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 const getTeamUser = async (userId) => {
   try {
     //try to take the user team and render it
     let dbTeam = await TeamsModel.findOne({ userId: userId });
-    console.log("team sended");
     return dbTeam.team;
   } catch (err) {
     console.log("can't connect to DB");
@@ -36,10 +27,11 @@ const getTeamUser = async (userId) => {
 const addPokemon = async (userId, pokemon) => {
   try {
     // look for a team in the db that no contains more than 6 pokemon in it, and add the pokemon to them
-    console.log(userId, pokemon);
     let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
-    //should use findIndex to search for ID
-    //if (dbPokeTeam.team.find((element) => element === pokemon) === undefined) {
+    // if (
+    //   dbPokeTeam.team.findIndex((element) => element === pokemon.pokeId) ===
+    //   undefined
+    // ) {
     if (dbPokeTeam.team.length == 6) {
       return console.log("user already got 6 pokemon");
     } else {
@@ -51,20 +43,6 @@ const addPokemon = async (userId, pokemon) => {
     // }
   } catch (err) {
     console.log("don't exist");
-  }
-};
-
-const setTeam = async (userId, team) => {
-  //set the  team in the order that the user want
-  let [err, dbTeam] = await to(
-    TeamsModel.updateOne(
-      { userId: userId },
-      { $set: { team: team } },
-      { upsert: true }
-    ).exec()
-  );
-  if (err || !dbTeam) {
-    return reject(err);
   }
 };
 
@@ -88,8 +66,6 @@ const deletePokemonAt = async (userId, pokemonId) => {
 module.exports = {
   newUserTeam,
   addPokemon,
-  setTeam,
   getTeamUser,
-  deleteTeam,
   deletePokemonAt,
 };
