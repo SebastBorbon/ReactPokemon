@@ -37,7 +37,7 @@ router.route("/pokemons").post(async (req, res) => {
     let pokemon = {
       name: pokemonName,
       pokeId: response.data.id,
-      sprite: response.data.sprites.front_default,
+      sprite: response.data.sprites.other.home.front_default,
     };
     await addPokemon(userId, pokemon);
     res.send(pokemon);
