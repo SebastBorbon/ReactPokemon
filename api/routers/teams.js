@@ -27,29 +27,24 @@ router.route("/").post(async (req, res) => {
   }
 });
 
-router
-  .route("/pokemons")
-  .post(async (req, res) => {
-    let pokemonName = req.body.pokemonName;
-    let userId = req.body.userId;
-    try {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
-      );
-      let pokemon = {
-        name: pokemonName,
-        pokeId: response.data.id,
-        sprite: response.data.sprites.front_default,
-      };
-      await addPokemon(userId, pokemon);
-      res.send(pokemon);
-    } catch (error) {
-      console.log("pokemon no encontrado");
-    }
-  })
-  .get((req, res) => {
-    res.send("estas en pokemons");
-  });
+router.route("/pokemons").post(async (req, res) => {
+  let pokemonName = req.body.pokemonName;
+  let userId = req.body.userId;
+  try {
+    const response = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+    );
+    let pokemon = {
+      name: pokemonName,
+      pokeId: response.data.id,
+      sprite: response.data.sprites.front_default,
+    };
+    await addPokemon(userId, pokemon);
+    res.send(pokemon);
+  } catch (error) {
+    console.log("pokemon no encontrado");
+  }
+});
 
 router.route("/pokemons").delete(async (req, res) => {
   try {
