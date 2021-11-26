@@ -8,9 +8,10 @@
   align-items: center;
 }
 
-.cards {
+.searchCard {
   flex-direction: row;
   align-items: center;
+  background-color: red;
 }
 .btnClose {
   display: flex;

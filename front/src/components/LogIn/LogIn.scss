@@ -9,16 +9,15 @@ $redFire: rgba(244, 91, 105, 1);
 $fontAsap: "Asap", sans-serif;
 
 body {
-  background-color: $redFire;
+  background-image: url("../../images/pokeback.png");
   font-family: $fontAsap;
 }
 .Sebas {
   position: absolute;
   bottom: 0%;
-  background-color: $redFire;
   color: white;
-  border-radius: 10%;
-  font-size: 60%;
+  border-radius: 5%;
+  font-size: 50%;
 }
 .pokemon {
   position: absolute;

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./LogIn.scss";
-import { logIn } from "../../redux/actions/sending";
+import { logIn, signUp } from "../../redux/actions/sending";
 import { useHistory } from "react-router";
-import pokefondo from "../../public/pokefondo.png";
+import pokefondo from "../../images/pokefondo.png";
 
 const LogIn = () => {
   const [error, setError] = useState("");
@@ -23,11 +23,6 @@ const LogIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let data = {
-      email: email,
-      password: password,
-    };
-    dispatch(logIn(data));
   };
   //verify if the user is an email
   function validateUser(value) {
@@ -59,14 +54,25 @@ const LogIn = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="btnSubmit">
+          <button
+            type="submit"
+            className="btnSubmit"
+            onClick={(e) => {
+              e.preventDefault();
+
+              dispatch(logIn(email, password));
+            }}
+          >
             Login
           </button>
           <button
             type="submit"
             className="btnSubmit"
             id="signUp"
-            onClick={(e) => history.push("/signup")}
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(signUp(email, password));
+            }}
           >
             Sign Up
           </button>

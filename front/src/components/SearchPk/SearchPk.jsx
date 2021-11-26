@@ -8,7 +8,7 @@ const SearchPk = ({ pokemonName, pokeId, sprite }) => {
   let userId = window.localStorage.getItem("userId");
 
   return (
-    <div className="cards">
+    <div className="searchCard">
       <div className="cardSearchPK">
         <p>{pokemonName}</p>
         {pokeId}
