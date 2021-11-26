@@ -3,10 +3,14 @@ import { SIGNUP, LOGIN, GET_URL, TEAM } from "./constants";
 
 //data send to the backend and save the response in the reducer
 //I used axios to post in the backend server
-export const logIn = (user) => {
+export const logIn = (email, password) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`${GET_URL}auth/login`, user);
+      let data = {
+        email: email,
+        password: password,
+      };
+      const res = await axios.post(`${GET_URL}auth/login`, data);
       console.log(res.data);
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: LOGIN, payload: res.data });
@@ -16,10 +20,14 @@ export const logIn = (user) => {
   };
 };
 
-export const signUp = (user) => {
+export const signUp = (email, password) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(`${GET_URL}auth/signup`, user);
+      let data = {
+        email: email,
+        password: password,
+      };
+      const res = await axios.post(`${GET_URL}auth/signup`, data);
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: SIGNUP, payload: res.data });
     } catch (err) {
@@ -40,7 +48,7 @@ export const teams = (userId) => {
   };
 };
 
-export const pokemonAdd = (userId, pokemonName, pokeId) => {
+export const pokemonAdd = (userId, pokemonName) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}teams/pokemons`, {
