@@ -7,32 +7,26 @@ const SearchBar = ({ onSearch }) => {
   // const dispatch = useDispatch();
 
   return (
-    <div id="cover">
+    <div className="SearchBarContainer">
       <form
-        method="get"
-        action=""
+        className="formSearchBar"
         onSubmit={(e) => {
           e.preventDefault();
           onSearch(pokemon);
         }}
       >
-        <div className="tb">
-          <div className="td">
-            <input
-              id="search"
-              type="text"
-              placeholder="Search Pokemon"
-              value={pokemon}
-              onChange={(e) => setPokemon(e.target.value)}
-              required
-            />
-          </div>
-          <div className="td" id="s-cover">
-            <button className="btnSearch" type="submit" value="Buscar">
-              <div id="s-circle"></div>
-              <span></span>
-            </button>
-          </div>
+        <div className="onlyInputs">
+          <input
+            className="inputSearch"
+            type="text"
+            placeholder="Search Pokemon..."
+            value={pokemon}
+            onChange={(e) => setPokemon(e.target.value)}
+            required
+          />
+          <span className="btnContainer">
+            <input className="btnSearch" type="submit" value="Search" />
+          </span>
         </div>
       </form>
     </div>

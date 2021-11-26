@@ -37,9 +37,9 @@ const Teams = () => {
         `https://pokeapi.co/api/v2/pokemon/${pokeSearched.toLowerCase()}`
       );
       const pokemon = {
-        name: pokeSearched.toLowerCase(),
+        name: response.data.name.toLowerCase(),
         pokeId: response.data.id,
-        sprite: response.data.sprites.front_default,
+        sprite: response.data.sprites.other.home.front_default,
       };
 
       setSearchPokemons(() => [pokemon]);
@@ -62,25 +62,34 @@ const Teams = () => {
   };
 
   return (
-    <div>
-      <div className="SearchBar">
-        <SearchBar onSearch={onSearch} />
+    <div className="ComponentTeams">
+      <div className="textContainer">
+        <h1 className="textTeam">Your team</h1>
       </div>
-      <div className="PokemonSearched">
-        {searchPokemons !== undefined
-          ? searchPokemons.map((pokemon) => {
-              return (
-                <SearchPk
-                  pokeId={pokemon.pokeId}
-                  pokemonName={pokemon.name}
-                  sprite={pokemon.sprite}
-                />
-              );
-            })
-          : console.log()}
+      <div className="Searches">
+        <div className="SearchBar">
+          <SearchBar onSearch={onSearch} />
+        </div>
+        <div className="PokemonSearched">
+          {searchPokemons !== undefined
+            ? searchPokemons.map((pokemon) => {
+                return (
+                  <SearchPk
+                    pokeId={pokemon.pokeId}
+                    pokemonName={pokemon.name}
+                    sprite={pokemon.sprite}
+                  />
+                );
+              })
+            : console.log()}
+        </div>
+        <div className="LogOut">
+          <button className="btnLogOut" onClick={(e) => handleSubmit(e)}>
+            Log out
+          </button>
+        </div>
       </div>
 
-      <h1 className="textTeam">Your team</h1>
       <div className="Team">
         {teamPokemons !== undefined
           ? teamPokemons.map((pokemon) => {
@@ -93,11 +102,6 @@ const Teams = () => {
               );
             })
           : console.log()}
-      </div>
-      <div className="LogOut">
-        <button className="btnLogOut" onClick={(e) => handleSubmit(e)}>
-          Log out
-        </button>
       </div>
     </div>
   );

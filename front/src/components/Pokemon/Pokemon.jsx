@@ -9,18 +9,24 @@ const Pokemon = ({ pokemonName, pokeId, sprite }) => {
   return (
     <div className="cards">
       <div className="cardPokemon">
-        <button
-          className="btnDelete"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(deletePokemon(userId, pokeId));
-          }}
-        >
-          X
-        </button>
-        <p>{pokemonName}</p>
-        <p>{pokeId}</p>
-        <img src={sprite} alt="no sprite" />
+        <div className="deleteContainer">
+          <button
+            className="btnDelete"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(deletePokemon(userId, pokeId));
+            }}
+          >
+            X
+          </button>
+        </div>
+        <div className="titleContainer">
+          <p>{pokemonName}</p>
+        </div>
+        {/* <p>{pokeId}</p> */}
+        <div className="imgContainer">
+          <img className="imgPokemon" src={sprite} alt="no sprite" />
+        </div>
       </div>
     </div>
   );

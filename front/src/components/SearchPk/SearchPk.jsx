@@ -10,11 +10,15 @@ const SearchPk = ({ pokemonName, pokeId, sprite }) => {
   return (
     <div className="searchCard">
       <div className="cardSearchPK">
-        <p>{pokemonName}</p>
-        {pokeId}
-        <img src={sprite} alt="no sprite" />
+        <div className="nameContainer">
+          <p className="pokemonName">{pokemonName}</p>
+        </div>
+        <p className="pokeId"> {pokeId}</p>
+        <div className="imgContainerPkSearched">
+          <img className="imgSearched" src={sprite} alt="no sprite" />
+        </div>
         <button
-          className="addPokemon"
+          className="addPokemonBtn"
           onClick={(e) => {
             e.preventDefault();
             dispatch(pokemonAdd(userId, pokemonName));
