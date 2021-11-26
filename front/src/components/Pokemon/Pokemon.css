@@ -1,27 +1,41 @@
 .cardPokemon {
   background-color: aliceblue;
-  width: 180px;
-  height: 180px;
-  margin: 20px;
+  width: 90%;
+  height: 90%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+}
+.cards {
+  width: 100%;
+  height: 100%;
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+}
+.titleContainer {
+  background-color: cornflowerblue;
+}
+.imgContainer {
+  background-color: brown;
+  width: 10%;
+  height: 10%;
+}
+.imgPokemon {
+  width: 60%;
+  height: 60%;
+  justify-content: center;
+  object-fit: contain;
 }
 
-.cards {
-  flex-direction: row;
-  align-items: center;
-  background-color: yellow;
+.deleteContainer {
+  background-color: violet;
 }
+
 .btnDelete {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   margin-right: 8px;
   margin-top: 8px;
-}
-
-.addPokemon {
-  background-color: aqua;
-  border-radius: 5%;
 }
