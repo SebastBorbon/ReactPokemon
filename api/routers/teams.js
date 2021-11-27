@@ -15,7 +15,7 @@ router.route("/").post(async (req, res) => {
   try {
     let user = await getUser(id);
     if (user.userName === undefined) {
-      console.log("no he cargado el user");
+      console.log("error on user");
     } else {
       res.send({
         userName: user.userName,
@@ -23,7 +23,7 @@ router.route("/").post(async (req, res) => {
       });
     }
   } catch (err) {
-    console.log("error en el teams");
+    console.log(err);
   }
 });
 
@@ -42,7 +42,7 @@ router.route("/pokemons").post(async (req, res) => {
     await addPokemon(userId, pokemon);
     res.send(pokemon);
   } catch (error) {
-    console.log("pokemon no encontrado");
+    console.log(err);
   }
 });
 
@@ -55,7 +55,7 @@ router.route("/pokemons").delete(async (req, res) => {
       team: await getTeamUser(req.body.userId),
     });
   } catch (err) {
-    return console.log("no se ha podido borrar el pokemon");
+    return console.log(err);
   }
 });
 

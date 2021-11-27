@@ -21,7 +21,7 @@ router.route("/signup").post(async (req, res) => {
 router.route("/login").post(async (req, res) => {
   const { email, password } = req.body;
   let user = await checkUserCredentials(email, password);
-  //si all the user data is correct, we send back the user
+  //if all the user data is correct, we send back the user
   return res.send(user);
 });
 
