@@ -9,6 +9,13 @@ const Pokemon = ({ pokemonName, pokeId, sprite }) => {
   return (
     <div className="cards">
       <div className="cardPokemon">
+        <div className="titleContainer">
+          <p className="pokemonTitle">{pokemonName}</p>
+        </div>
+        {/* <p>{pokeId}</p> */}
+        <div className="imgContainer">
+          <img className="imgPokemon" src={sprite} alt="no sprite" />
+        </div>
         <div className="deleteContainer">
           <button
             className="btnDelete"
@@ -17,15 +24,8 @@ const Pokemon = ({ pokemonName, pokeId, sprite }) => {
               dispatch(deletePokemon(userId, pokeId));
             }}
           >
-            X
+            liberar
           </button>
-        </div>
-        <div className="titleContainer">
-          <p>{pokemonName}</p>
-        </div>
-        {/* <p>{pokeId}</p> */}
-        <div className="imgContainer">
-          <img className="imgPokemon" src={sprite} alt="no sprite" />
         </div>
       </div>
     </div>
