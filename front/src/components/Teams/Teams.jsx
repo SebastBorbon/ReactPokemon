@@ -7,9 +7,15 @@ import Pokemon from "../Pokemon/Pokemon";
 import SearchPk from "../SearchPk/SearchPk";
 import "./Teams.css";
 import axios from "axios";
-import pokeball from "../../images/pokeball.png";
+import pokeball from "../../images/Pokebola.png";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
 
+if (typeof window !== "undefined") {
+  injectStyle();
+}
 const Teams = () => {
+  //TODO add alerts for incorrect credentials!
   const [searchPokemons, setSearchPokemons] = useState([]);
   const dispatch = useDispatch();
   const teamPokemons = useSelector((state) => state.team.team);
@@ -22,16 +28,10 @@ const Teams = () => {
     if (!userId) {
       history.push("/");
       window.location.reload();
-    } else {
-      if (teamPokemons === undefined) {
-        dispatch(teams(userId));
-      } else {
-        teamPokemons.forEach((pokemon) => {
-          console.log(pokemon.name);
-        });
-      }
+    } else if (teamPokemons === undefined) {
+      dispatch(teams(userId));
     }
-  }, [dispatch, userId, teamPokemons, searchPokemons]);
+  }, [dispatch, userId, teamPokemons, searchPokemons, history]);
 
   const onSearch = async (pokeSearched) => {
     try {
@@ -45,8 +45,8 @@ const Teams = () => {
       };
 
       setSearchPokemons(() => [pokemon]);
-    } catch (err) {
-      console.log("no se pudo hacer la solicitud");
+    } catch {
+      toast.dark("invalid search!");
     }
   };
 
@@ -66,9 +66,19 @@ const Teams = () => {
   return (
     <div className="ComponentTeams">
       <div className="titleTeamContainer">
-        <h1 className="textTeam">Your team</h1>
+        <h1 className="textTeam">Your team:</h1>
         <div className="ballContainer">
-          <img src={pokeball} alt="cant charge img" className="pokeball" />
+          {teamPokemons !== undefined
+            ? teamPokemons.map(() => {
+                return (
+                  <img
+                    src={pokeball}
+                    alt="cant charge img"
+                    className="pokeball"
+                  />
+                );
+              })
+            : console.log()}
         </div>
       </div>
 
@@ -95,7 +105,6 @@ const Teams = () => {
           </button>
         </div>
       </div>
-
       <div className="Team">
         {teamPokemons !== undefined
           ? teamPokemons.map((pokemon) => {
@@ -109,6 +118,7 @@ const Teams = () => {
             })
           : console.log()}
       </div>
+      <ToastContainer />
     </div>
   );
 };
