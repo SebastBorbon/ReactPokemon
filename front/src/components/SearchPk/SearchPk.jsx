@@ -24,7 +24,7 @@ const SearchPk = ({ pokemonName, pokeId, sprite }) => {
             dispatch(pokemonAdd(userId, pokemonName));
           }}
         >
-          Add
+          Catch!
         </button>
       </div>
     </div>

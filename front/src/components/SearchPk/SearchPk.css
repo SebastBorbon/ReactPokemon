@@ -6,52 +6,59 @@
   justify-content: center;
 }
 .cardSearchPK {
-  width: 50%;
-  height: 90%;
+  width: 35%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   border: solid;
   border-radius: 5px 5px 5px 5px;
-  border-color: #0a7508;
+  border-color: rgb(255, 206, 160);
+  justify-content: space-between;
+  box-shadow: 5px 5px 25px 5px #fff8b9;
+}
+
+.imgContainerPkSearched {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 206, 160);
 }
 
 .imgSearched {
-  width: 80%;
-  height: 90%;
-  display: flex;
-  justify-content: center;
+  width: 65%;
+  height: 75%;
+  object-fit: contain;
 }
 
 .nameContainer {
+  background-color: rgb(172, 126, 73);
   width: 100%;
-  border-bottom: solid 4px;
-  border-color: #0a7508;
   display: flex;
   justify-content: center;
 }
 .pokemonName {
-  font-size: 20px;
-  font-family: "Asap", sans-serif;
-  color: #0a7508;
+  font-size: medium;
+  color: white;
   display: flex;
   justify-content: center;
+}
+
+.addPokemonBtn {
+  background-color: #69512d;
+  font-size: 20px;
+  color: white;
+  border-radius: 0px 0px 3px 3px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+.addPokemonBtn:hover {
+  background-color: #a78148;
 }
 
 .pokeId {
   display: none;
-}
-
-.addPokemonBtn {
-  background-color: #0a7508;
-
-  font-size: 20px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  bottom: 100%;
-  justify-content: center;
-}
-.addPokemonBtn:hover {
-  background-color: #10970e;
 }
