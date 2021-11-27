@@ -11,7 +11,6 @@ export const logIn = (email, password) => {
         password: password,
       };
       const res = await axios.post(`${GET_URL}auth/login`, data);
-      console.log(res.data);
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: LOGIN, payload: res.data });
     } catch (err) {
@@ -40,7 +39,6 @@ export const teams = (userId) => {
   return async (dispatch) => {
     try {
       const res = await axios.post(`${GET_URL}teams`, { userId: userId });
-      console.log(res.data);
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
       return console.log(err);
