@@ -10,7 +10,6 @@ import { injectStyle } from "react-toastify/dist/inject-style";
 if (typeof window !== "undefined") {
   injectStyle();
 }
-
 const LogIn = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
@@ -30,25 +29,26 @@ const LogIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-  //verify if the user is an email
-  function validateUser(email) {
+  //validations for data
+  const validateUser = (email) => {
     if (!/\S+@\S+\.\S+/.test(email) && !error) {
       setError("User needs to be an email");
     } else {
       setError("");
     }
     setEmail(email);
-  }
-  function validatePassword(password) {
+  };
+
+  const validatePassword = (password) => {
     if (password.length <= 3) {
-      setError("Pass needs at least 4 digits");
+      setError("Add a valid password");
     } else {
       setError("");
     }
     setPassword(password);
-  }
+  };
 
-  function sendlogIn(e) {
+  const sendlogIn = (e) => {
     if (!password && !email) {
       toast.dark("ey type an user!");
     } else if (!email) {
@@ -61,9 +61,9 @@ const LogIn = () => {
       e.preventDefault();
       dispatch(logIn(email, password));
     }
-  }
+  };
 
-  function sendSignUp(e) {
+  const sendSignUp = (e) => {
     if (!password && !email) {
       toast.dark("ey type an user!");
     } else if (!email) {
@@ -76,7 +76,7 @@ const LogIn = () => {
       e.preventDefault();
       dispatch(signUp(email, password));
     }
-  }
+  };
 
   return (
     <div>
