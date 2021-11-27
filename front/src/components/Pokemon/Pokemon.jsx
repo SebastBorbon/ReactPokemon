@@ -24,7 +24,7 @@ const Pokemon = ({ pokemonName, pokeId, sprite }) => {
               dispatch(deletePokemon(userId, pokeId));
             }}
           >
-            liberar
+            let it go
           </button>
         </div>
       </div>

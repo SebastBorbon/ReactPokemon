@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0px 5px 5px 0px;
 }
 
 .cardPokemon {
@@ -44,7 +45,8 @@
 }
 
 .pokemonTitle {
-  font-size: medium;
+  font-size: 20px;
+  font-style: bold;
   color: white;
   display: flex;
   justify-content: center;
