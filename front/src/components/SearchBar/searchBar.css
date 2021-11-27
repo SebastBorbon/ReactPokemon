@@ -24,24 +24,24 @@
   border-left: 1px;
 }
 .inputSearch:focus {
-  background-color: #ffeccc;
+  background-color: rgb(246, 212, 173);
   outline: none;
 }
 
 .btnSearch {
   color: #fff;
-  background-color: orange;
+  background-color: rgb(17, 93, 55);
   width: 30%;
-  height: 105%;
+  height: 95%;
   margin-top: 2px;
   font-size: small;
   border: none;
   cursor: pointer;
-  box-shadow: 5px 5px 20px 0px #d1d1d1;
+  box-shadow: 5px 5px 20px 0px #c0bfbf;
   border-radius: 0px 5px 5px 0px;
 }
 .btnSearch:hover {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: rgb(172, 126, 73);
+  border-color: rgb(172, 126, 73);
 }
