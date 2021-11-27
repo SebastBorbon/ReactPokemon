@@ -4,6 +4,12 @@ import "./LogIn.scss";
 import { logIn, signUp } from "../../redux/actions/sending";
 import { useHistory } from "react-router";
 import pokefondo from "../../images/pokefondo.png";
+import { ToastContainer, toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
+
+if (typeof window !== "undefined") {
+  injectStyle();
+}
 
 const LogIn = () => {
   const [error, setError] = useState("");
@@ -19,19 +25,57 @@ const LogIn = () => {
       history.push("/teams");
       window.location.reload();
     }
-  }, [logged, history]);
+  }, [dispatch, email, password, logged, history, error]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   //verify if the user is an email
-  function validateUser(value) {
-    if (!/\S+@\S+\.\S+/.test(value)) {
+  function validateUser(email) {
+    if (!/\S+@\S+\.\S+/.test(email) && !error) {
       setError("User needs to be an email");
     } else {
-      setError(" ");
+      setError("");
     }
-    setEmail(value);
+    setEmail(email);
+  }
+  function validatePassword(password) {
+    if (password.length <= 3) {
+      setError("Pass needs at least 4 digits");
+    } else {
+      setError("");
+    }
+    setPassword(password);
+  }
+
+  function sendlogIn(e) {
+    if (!password && !email) {
+      toast.dark("ey type an user!");
+    } else if (!email) {
+      toast.dark("u need  an email!");
+    } else if (!password) {
+      toast.dark("u need a password!");
+    } else if (error) {
+      toast.dark(error);
+    } else {
+      e.preventDefault();
+      dispatch(logIn(email, password));
+    }
+  }
+
+  function sendSignUp(e) {
+    if (!password && !email) {
+      toast.dark("ey type an user!");
+    } else if (!email) {
+      toast.dark("u need  an email!");
+    } else if (!password) {
+      toast.dark("u need a password!");
+    } else if (error) {
+      toast.dark(error);
+    } else {
+      e.preventDefault();
+      dispatch(signUp(email, password));
+    }
   }
 
   return (
@@ -45,22 +89,20 @@ const LogIn = () => {
             onChange={(e) => validateUser(e.target.value)}
             required
           />
-          {!error ? null : <p>{error}</p>}
           <input
             name="password"
             value={password}
             placeholder="Password"
             type="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => validatePassword(e.target.value)}
             required
           />
+
           <button
             type="submit"
             className="btnSubmit"
             onClick={(e) => {
-              e.preventDefault();
-
-              dispatch(logIn(email, password));
+              sendlogIn(e);
             }}
           >
             Login
@@ -70,8 +112,7 @@ const LogIn = () => {
             className="btnSubmit"
             id="signUp"
             onClick={(e) => {
-              e.preventDefault();
-              dispatch(signUp(email, password));
+              sendSignUp(e);
             }}
           >
             Sign Up
@@ -84,6 +125,7 @@ const LogIn = () => {
           <h1 className="ByMe">By Sebastian Borbon</h1>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
