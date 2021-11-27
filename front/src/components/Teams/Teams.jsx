@@ -7,6 +7,7 @@ import Pokemon from "../Pokemon/Pokemon";
 import SearchPk from "../SearchPk/SearchPk";
 import "./Teams.css";
 import axios from "axios";
+import pokeball from "../../images/pokeball.png";
 
 const Teams = () => {
   const [searchPokemons, setSearchPokemons] = useState([]);
@@ -18,16 +19,17 @@ const Teams = () => {
   const history = useHistory();
 
   useEffect(() => {
-    // if (!userId) {
-    //   history.push("/");
-    //   window.location.reload();
-    // } else {
-    if (teamPokemons === undefined) {
-      dispatch(teams(userId));
+    if (!userId) {
+      history.push("/");
+      window.location.reload();
     } else {
-      teamPokemons.forEach((pokemon) => {
-        console.log(pokemon.name);
-      });
+      if (teamPokemons === undefined) {
+        dispatch(teams(userId));
+      } else {
+        teamPokemons.forEach((pokemon) => {
+          console.log(pokemon.name);
+        });
+      }
     }
   }, [dispatch, userId, teamPokemons, searchPokemons]);
 
@@ -50,7 +52,7 @@ const Teams = () => {
 
   const logOut = () => {
     if (userId) {
-      window.localStorage.removeItem(userId);
+      window.localStorage.removeItem("userId");
       history.push("/");
       window.location.reload();
     }
@@ -63,9 +65,13 @@ const Teams = () => {
 
   return (
     <div className="ComponentTeams">
-      <div className="textContainer">
+      <div className="titleTeamContainer">
         <h1 className="textTeam">Your team</h1>
+        <div className="ballContainer">
+          <img src={pokeball} alt="cant charge img" className="pokeball" />
+        </div>
       </div>
+
       <div className="Searches">
         <div className="SearchBar">
           <SearchBar onSearch={onSearch} />
@@ -85,7 +91,7 @@ const Teams = () => {
         </div>
         <div className="LogOut">
           <button className="btnLogOut" onClick={(e) => handleSubmit(e)}>
-            Log out
+            Logout
           </button>
         </div>
       </div>

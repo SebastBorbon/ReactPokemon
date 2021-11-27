@@ -5,8 +5,30 @@
   align-items: center;
   height: 700px;
   flex-flow: wrap;
+  background-color: transparent;
 }
 
+.titleTeamContainer {
+  background-color: white;
+  border-radius: 0px 10px 10px 0px;
+  border: solid;
+  border-color: rgb(56, 97, 81);
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: 10%;
+}
+.textTeam {
+  font-size: 25px;
+  font-style: italic;
+}
+/* .ballContainer {
+} */
+.pokeball {
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
 .Searches {
   background-color: white;
   display: flex;
@@ -27,19 +49,11 @@
   display: flex;
 }
 .LogOut {
-  background-color: blue;
   height: 10%;
   width: 100%;
   display: flex;
-  align-items: flex-end;
-}
-.btnLogOut {
-  background-color: white;
-  border-radius: 20%;
-  height: 40px;
-  margin-top: 10%;
-  margin-left: 5%;
-  cursor: pointer;
+  align-items: center;
+  margin-left: 3%;
 }
 
 .Team {
@@ -47,18 +61,26 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  background-color: green;
+  background-color: rgb(56, 97, 81);
+  border-left: solid;
+  border-left-color: rgb(56, 97, 81);
   width: 50%;
   height: 90%;
 }
-.textContainer {
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  width: 80%;
-  height: 10%;
+
+.btnLogOut {
+  background-color: rgb(17, 93, 55);
+  width: 15%;
+  border-radius: 5px 5px 5px 5px;
+  height: 60%;
+  cursor: pointer;
+  font-size: medium;
+  border: none;
+  box-shadow: 5px 5px 20px 0px #d1d1d1;
+  color: white;
 }
-.textTeam {
-  font-size: 25px;
-  font-style: italic;
+.btnLogOut:hover {
+  color: #fff;
+  background-color: rgb(172, 126, 73);
+  border-color: rgb(172, 126, 73);
 }
