@@ -16,11 +16,16 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   //used for mantain the session active
+  let userId = window.localStorage.getItem("userId");
   const logged = useSelector((state) => state.user.userId);
   const history = useHistory();
-  //redirect when the user connect
+  //redirect when the user connects and redirect when the user is already connect
   useEffect(() => {
     if (logged) {
+      history.push("/teams");
+      window.location.reload();
+    }
+    if (userId) {
       history.push("/teams");
       window.location.reload();
     }
