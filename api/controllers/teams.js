@@ -8,7 +8,7 @@ const newUserTeam = async (userId) => {
   //when a  new user is created, the team also is created over that user
   let newTeam = new TeamsModel({ userId: userId, team: [] });
   try {
-    await newTeam.save().then(() => console.log("new team created"));
+    await newTeam.save();
   } catch (err) {
     console.log("cant create new team ");
   }
@@ -20,7 +20,7 @@ const getTeamUser = async (userId) => {
     let dbTeam = await TeamsModel.findOne({ userId: userId });
     return dbTeam.team;
   } catch (err) {
-    console.log("can't connect to DB");
+    console.log(err);
   }
 };
 
@@ -28,38 +28,26 @@ const addPokemon = async (userId, pokemon) => {
   try {
     // look for a team in the db that no contains more than 6 pokemon in it, and add the pokemon to them
     let dbPokeTeam = await TeamsModel.findOne({ userId: userId });
-    // if (
-    //   dbPokeTeam.team.findIndex((element) => element === pokemon.pokeId) ===
-    //   undefined
-    // ) {
-    if (dbPokeTeam.team.length == 6) {
-      return console.log("user already got 6 pokemon");
-    } else {
-      dbPokeTeam.team.push(pokemon);
-      await dbPokeTeam.save().then(() => console.log("pokemon added"));
-    }
-    // } else {
-    //   console.log("already have that pokemon");
-    // }
+    dbPokeTeam.team.push(pokemon);
+    await dbPokeTeam.save();
   } catch (err) {
-    console.log("don't exist");
+    console.log(err);
   }
 };
 
 const deletePokemonAt = async (userId, pokemonId) => {
   try {
     //look if the pokemon already exists in the team and because if an array splice the array to delete the pokemon from the team
-    dbTeam = await TeamsModel.findOne({ userId: userId });
-    console.log(dbTeam.team);
-    let index = dbTeam.team.map((pokemon) => pokemon.pokeId).indexOf(pokemonId);
 
+    dbTeam = await TeamsModel.findOne({ userId: userId });
+    let index = dbTeam.team.map((pokemon) => pokemon.pokeId).indexOf(pokemonId);
     if (dbTeam.team[index]) {
       dbTeam.team.splice(index, 1);
     }
     await dbTeam.save();
     return dbTeam.team;
   } catch (err) {
-    console.log(" deletePkAt failed");
+    console.log(err);
   }
 };
 
