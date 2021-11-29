@@ -16,15 +16,21 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   //used for mantain the session active
+  const userId = window.localStorage.getItem("userId");
   const logged = useSelector((state) => state.user.userId);
   const history = useHistory();
-  //redirect when the user connect
+  const backendError = useSelector((state) => state.error.message);
+  //redirect when the user login and redirect when the user was already logged
   useEffect(() => {
     if (logged) {
       history.push("/teams");
       window.location.reload();
     }
-  }, [dispatch, email, password, logged, history, error]);
+    if (userId) {
+      history.push("/teams");
+      window.location.reload();
+    }
+  }, [error, backendError, userId, password, logged, history]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +54,7 @@ const LogIn = () => {
     setPassword(password);
   };
 
-  const sendlogIn = (e) => {
+  const sendlogIn = async (e) => {
     if (!password && !email) {
       toast.dark("ey type an user!");
     } else if (!email) {
@@ -63,7 +69,7 @@ const LogIn = () => {
     }
   };
 
-  const sendSignUp = (e) => {
+  const sendSignUp = async (e) => {
     if (!password && !email) {
       toast.dark("ey type an user!");
     } else if (!email) {

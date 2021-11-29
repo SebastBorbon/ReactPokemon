@@ -5,7 +5,6 @@ import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 const SearchPk = ({ pokemonName, pokeId, sprite }) => {
-  //should add a validation that don't dispatch if the pokemon already exists
   const dispatch = useDispatch();
   let userId = window.localStorage.getItem("userId");
   const teamPokemons = useSelector((state) => state.team.team);
