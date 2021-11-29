@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SIGNUP, LOGIN, GET_URL, TEAM } from "./constants";
+import { SIGNUP, LOGIN, GET_URL, TEAM, ERROR } from "./constants";
 
 //data send to the backend and save the response in the reducer
 //I used axios to post in the backend server
@@ -14,7 +14,8 @@ export const logIn = (email, password) => {
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: LOGIN, payload: res.data });
     } catch (err) {
-      return console.log(err);
+      const res = err.response.data;
+      dispatch({ type: ERROR, payload: res });
     }
   };
 };
@@ -30,7 +31,8 @@ export const signUp = (email, password) => {
       window.localStorage.setItem("userId", res.data.userId.toString());
       dispatch({ type: SIGNUP, payload: res.data });
     } catch (err) {
-      return console.log("fallo en el signup");
+      const res = err.response.data;
+      dispatch({ type: ERROR, payload: res });
     }
   };
 };
@@ -41,7 +43,9 @@ export const teams = (userId) => {
       const res = await axios.post(`${GET_URL}teams`, { userId: userId });
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
-      return console.log(err);
+      const res = err.response.data;
+
+      dispatch({ type: ERROR, payload: res });
     }
   };
 };
@@ -55,7 +59,9 @@ export const pokemonAdd = (userId, pokemonName) => {
       });
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
-      return console.log("fallo pokemonAdd");
+      const res = err.response.data;
+
+      dispatch({ type: ERROR, payload: res });
     }
   };
 };
@@ -71,7 +77,9 @@ export const deletePokemon = (userId, pokemonId) => {
       });
       dispatch({ type: TEAM, payload: res.data });
     } catch (err) {
-      return console.log("fallo en  el delete Pk");
+      const res = err.response.data;
+
+      dispatch({ type: ERROR, payload: res });
     }
   };
 };

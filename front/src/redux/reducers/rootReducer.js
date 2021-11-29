@@ -1,10 +1,11 @@
 // import { useReducer } from "react";
-import { LOGIN, SIGNUP, TEAM } from "../actions/constants";
+import { LOGIN, SIGNUP, TEAM, ERROR } from "../actions/constants";
 
 const initialState = {
   logged: false,
   user: [],
   team: [],
+  error: [],
 };
 //I update the states with the backend response
 export function reducer(state = initialState, action) {
@@ -14,6 +15,11 @@ export function reducer(state = initialState, action) {
         ...state,
         logged: true,
         user: action.payload,
+      };
+    case ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     case SIGNUP:
       return {
