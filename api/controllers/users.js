@@ -25,7 +25,7 @@ const registerUser = async (userName, password) => {
         userName: userName,
         password: hashedPwd,
       });
-      await newUser.save().then(() => console.log("hecho rey"));
+      await newUser.save();
       await newUserTeam(userId);
     }
   } catch {
@@ -65,7 +65,7 @@ const checkUserCredentials = async (email, password) => {
       if (userPassword) {
         return user;
       } else {
-        console.log("incorrect Password");
+        res.status(404).send({ message: "incorrect password" });
       }
     }
   } catch {
