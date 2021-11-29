@@ -28,8 +28,8 @@ const registerUser = async (userName, password) => {
       await newUser.save();
       await newUserTeam(userId);
     }
-  } catch {
-    console.log("Can't create a new User");
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -39,7 +39,7 @@ const getUser = async (userId) => {
     console.log(findedUser);
     return findedUser;
   } catch (err) {
-    console.log("Don't get any user from DB");
+    console.log(err);
   }
 };
 
@@ -47,13 +47,11 @@ const getUserIdFromEmail = async (email) => {
   try {
     let userByName = await UserModel.findOne({ userName: email });
     if (!userByName) {
-      res.send("incorrect user");
+      res.status(404).send({ message: "incorrect username" });
     } else {
       return userByName;
     }
-  } catch {
-    console.log("Can't connect to BD");
-  }
+  } catch {}
 };
 
 const checkUserCredentials = async (email, password) => {
@@ -64,12 +62,10 @@ const checkUserCredentials = async (email, password) => {
       let userPassword = await bcrypt.compare(password, user.password);
       if (userPassword) {
         return user;
-      } else {
-        res.status(404).send({ message: "incorrect password" });
       }
     }
-  } catch {
-    console.log("invalid user");
+  } catch (err) {
+    console.log(err);
   }
 };
 
