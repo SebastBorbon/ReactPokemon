@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SIGNUP, LOGIN, GET_URL, TEAM, ERROR } from "./constants";
+import { SIGNUP, LOGIN, GET_URL, TEAM, ERROR, CLEANERROR } from "./constants";
 
 //data send to the backend and save the response in the reducer
 //I used axios to post in the backend server
@@ -81,5 +81,11 @@ export const deletePokemon = (userId, pokemonId) => {
 
       dispatch({ type: ERROR, payload: res });
     }
+  };
+};
+
+export const cleanError = () => {
+  return async (dispatch) => {
+    dispatch({ type: CLEANERROR });
   };
 };

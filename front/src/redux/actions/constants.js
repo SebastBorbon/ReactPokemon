@@ -5,3 +5,4 @@ export const TEAM = "TEAM";
 export const SEARCH = "SEARCH";
 export const DELETEPK = "DELETEPK";
 export const ERROR = "ERROR";
+export const CLEANERROR = "CLEANERROR";

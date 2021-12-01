@@ -28,10 +28,10 @@ const Teams = () => {
     if (!userId) {
       history.push("/");
       window.location.reload();
-    } else if (teamPokemons === undefined) {
+    } else if (!teamPokemons) {
       dispatch(teams(userId));
     }
-  }, [dispatch, userId, teamPokemons, history]);
+  }, [userId, teamPokemons]);
 
   const onSearch = async (pokeSearched) => {
     try {

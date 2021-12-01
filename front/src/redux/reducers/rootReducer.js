@@ -1,5 +1,5 @@
 // import { useReducer } from "react";
-import { LOGIN, SIGNUP, TEAM, ERROR } from "../actions/constants";
+import { LOGIN, SIGNUP, TEAM, ERROR, CLEANERROR } from "../actions/constants";
 
 const initialState = {
   logged: false,
@@ -31,6 +31,11 @@ export function reducer(state = initialState, action) {
       return {
         ...state,
         team: action.payload,
+      };
+    case CLEANERROR:
+      return {
+        ...state,
+        error: [],
       };
     default:
       return state;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./LogIn.scss";
-import { logIn, signUp } from "../../redux/actions/sending";
+import { logIn, signUp, cleanError } from "../../redux/actions/sending";
 import { useHistory } from "react-router";
 import pokefondo from "../../images/pokefondo.png";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,6 +22,9 @@ const LogIn = () => {
   const backendError = useSelector((state) => state.error.message);
   //redirect when the user login and redirect when the user was already logged
   useEffect(() => {
+    if (backendError) {
+      toast.dark(backendError);
+    }
     if (logged) {
       history.push("/teams");
       window.location.reload();
@@ -30,8 +33,14 @@ const LogIn = () => {
       history.push("/teams");
       window.location.reload();
     }
-  }, [error, backendError, userId, password, logged, history]);
+  }, [userId, logged]);
 
+  useEffect(() => {
+    if (backendError?.length) {
+      toast.dark(backendError);
+      dispatch(cleanError());
+    }
+  }, [backendError]);
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -56,32 +65,36 @@ const LogIn = () => {
 
   const sendlogIn = async (e) => {
     if (!password && !email) {
-      toast.dark("ey type an user!");
-    } else if (!email) {
-      toast.dark("u need  an email!");
-    } else if (!password) {
-      toast.dark("u need a password!");
-    } else if (error) {
-      toast.dark(error);
-    } else {
-      e.preventDefault();
-      dispatch(logIn(email, password));
+      return toast.dark("ey type an user!");
     }
+    if (!email) {
+      return toast.dark("u need  an email!");
+    }
+    if (!password) {
+      return toast.dark("u need a password!");
+    }
+    if (error) {
+      return toast.dark(error);
+    }
+    e.preventDefault();
+    dispatch(logIn(email, password));
   };
 
   const sendSignUp = async (e) => {
     if (!password && !email) {
-      toast.dark("ey type an user!");
-    } else if (!email) {
-      toast.dark("u need  an email!");
-    } else if (!password) {
-      toast.dark("u need a password!");
-    } else if (error) {
-      toast.dark(error);
-    } else {
-      e.preventDefault();
-      dispatch(signUp(email, password));
+      return toast.dark("ey type an user!");
     }
+    if (!email) {
+      return toast.dark("u need  an email!");
+    }
+    if (!password) {
+      return toast.dark("u need a password!");
+    }
+    if (error) {
+      return toast.dark(error);
+    }
+    e.preventDefault();
+    dispatch(signUp(email, password));
   };
 
   return (
