@@ -64,6 +64,7 @@ const LogIn = () => {
   };
 
   const sendlogIn = async (e) => {
+    e.preventDefault();
     if (!password && !email) {
       return toast.dark("ey type an user!");
     }
@@ -76,11 +77,12 @@ const LogIn = () => {
     if (error) {
       return toast.dark(error);
     }
-    e.preventDefault();
+
     dispatch(logIn(email, password));
   };
 
   const sendSignUp = async (e) => {
+    e.preventDefault();
     if (!password && !email) {
       return toast.dark("ey type an user!");
     }
@@ -93,7 +95,7 @@ const LogIn = () => {
     if (error) {
       return toast.dark(error);
     }
-    e.preventDefault();
+
     dispatch(signUp(email, password));
   };
 
