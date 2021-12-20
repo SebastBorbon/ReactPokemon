@@ -142,9 +142,6 @@ const LogIn = () => {
         <div className="pokemon">
           <img src={pokefondo} alt="cant charge img" className="pokefondo" />
         </div>
-        <div className="Sebas">
-          <h1 className="ByMe">By Sebastian Borbon</h1>
-        </div>
       </div>
       <ToastContainer />
     </div>
