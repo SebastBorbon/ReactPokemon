@@ -1,4 +1,5 @@
 # Pokemon React Express aplication
+Aplication made by Sebastian Velez with the PokeApi 
 
 Objective:
 Define an API to manage Pokemons
@@ -19,3 +20,5 @@ Define an API to manage Pokemons
 - State management with react
 - User validation
 - Design on fully Css
+
+
