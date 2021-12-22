@@ -22,9 +22,6 @@ const LogIn = () => {
   const backendError = useSelector((state) => state.error.message);
   //redirect when the user login and redirect when the user was already logged
   useEffect(() => {
-    if (backendError) {
-      toast.dark(backendError);
-    }
     if (logged) {
       history.push("/teams");
       window.location.reload();
@@ -33,14 +30,17 @@ const LogIn = () => {
       history.push("/teams");
       window.location.reload();
     }
-  }, [userId, logged]);
+  }, [userId, logged, history]);
 
   useEffect(() => {
+    if (backendError) {
+      toast.dark(backendError);
+    }
     if (backendError?.length) {
       toast.dark(backendError);
       dispatch(cleanError());
     }
-  }, [backendError]);
+  }, [backendError, dispatch]);
   const handleSubmit = (e) => {
     e.preventDefault();
   };

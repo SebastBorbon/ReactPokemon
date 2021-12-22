@@ -31,7 +31,7 @@ const Teams = () => {
     } else if (!teamPokemons) {
       dispatch(teams(userId));
     }
-  }, [userId, teamPokemons]);
+  }, [userId, teamPokemons, history, dispatch]);
 
   const onSearch = async (pokeSearched) => {
     try {
