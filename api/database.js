@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 
 //I setup the dnfo nedeed to connect with te database on mongo
-const url = `mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.ob3da.mongodb.net/mydatabase?retryWrites=true&w=majority`;
+const url = `mongodb+srv://admin:1234@cluster0.ob3da.mongodb.net/mydatabase?retryWrites=true&w=majority`;
 
 const connectionParams = {
   useNewUrlParser: true,
