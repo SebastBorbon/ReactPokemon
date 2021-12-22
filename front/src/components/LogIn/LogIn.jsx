@@ -33,7 +33,7 @@ const LogIn = () => {
       history.push("/teams");
       window.location.reload();
     }
-  }, [userId, logged]);
+  }, [userId, logged, history]);
 
   useEffect(() => {
     if (backendError?.length) {
