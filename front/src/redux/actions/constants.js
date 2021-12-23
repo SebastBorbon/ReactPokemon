@@ -1,4 +1,4 @@
-export const GET_URL = "http://localhost:3000/";
+export const GET_URL = "http://pokeapi.sebasdev.com/";
 export const LOGIN = "LOGIN";
 export const SIGNUP = "SIGNUP";
 export const TEAM = "TEAM";
