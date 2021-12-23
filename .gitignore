@@ -1,2 +1,6 @@
 
 api/.env
+
+front/package-lock.json
+
+front/node_modules/

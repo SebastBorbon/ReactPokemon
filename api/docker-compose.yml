@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  pokeapi:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/pokeapi
+      - usr/src/pokeapi/node_modules
+    command: npx nodemon app.js -L
