@@ -10,15 +10,17 @@ Define an API to manage Pokemons
 - Remove Pokémon from our team
 
 # REST Design
+-The rest Api was made with express and mongo atlas for the DB
 - User system
 - Add Pokémon: POST / team / pokemons
 - Consular Team: GET
 - Delete Pokémon: DELETE team / pokemons /: id
 
 # Front Design
-- Api petitions with redux thunk
+-Front design with react and Css
+- Api petitions with redux(thunk)
 - State management with react
-- User validation
-- Design on fully Css
+- User validation with redux
+
 
 
