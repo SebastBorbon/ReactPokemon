@@ -31,7 +31,7 @@ const Teams = () => {
     } else if (!teamPokemons) {
       dispatch(teams(userId));
     }
-  }, [userId, teamPokemons, history]);
+  }, [userId, teamPokemons, history, dispatch]);
 
   const onSearch = async (pokeSearched) => {
     try {
@@ -68,7 +68,7 @@ const Teams = () => {
       <div className="titleTeamContainer">
         <h1 className="textTeam">Your team:</h1>
         <div className="ballContainer">
-          {teamPokemons !== undefined
+          {teamPokemons
             ? teamPokemons.map(() => {
                 return (
                   <img

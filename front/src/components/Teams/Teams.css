@@ -3,9 +3,8 @@
   flex-direction: row;
   margin-top: 5%;
   align-items: center;
-  height: 700px;
+  height: 70vh;
   flex-flow: wrap;
-  background-color: transparent;
 }
 
 .titleTeamContainer {
@@ -95,4 +94,28 @@
   color: #fff;
   background-color: rgb(172, 126, 73);
   border-color: rgb(172, 126, 73);
+}
+
+@media only screen and (max-width: 380px) {
+  .ComponentTeams {
+    flex-direction: column;
+    height: 200vh;
+  }
+  .textTeam {
+    font-size: 15px;
+    font-style: bold;
+    margin-left: 10px;
+  }
+  .titleTeamContainer {
+    align-items: left;
+    justify-content: left;
+    width: 100%;
+  }
+  .ballContainer {
+    width: 100%;
+  }
+  .pokeball {
+    width: 70%;
+    height: 40%;
+  }
 }
