@@ -17,7 +17,7 @@ Define an API to manage Pokemons
 - Delete Pokémon: DELETE team / pokemons /: id
 
 # Front Design
--Front design with react and Css
+- Front design with react and Css
 - Api petitions with redux(thunk)
 - State management with react
 - User validation with redux
